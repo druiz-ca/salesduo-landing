@@ -1143,10 +1143,13 @@ window.addEventListener('scroll', () => {
 });
 
 // ── FORM SUBMIT ────────────────────────────────────────────────────────────
-function handleSubmit(btn) {
+async function handleSubmit(btn) {
   const form = btn.closest('.demo-form');
   const name = form.querySelector('input[type="text"]').value;
   const email = form.querySelector('input[type="email"]').value;
+  const tipo = form.querySelectorAll('select')[0].value;
+  const sector = form.querySelectorAll('select')[1].value;
+
   if (!name || !email) {
     btn.style.background = '#ff4d6d';
     btn.textContent = 'Completa tu nombre y email';
@@ -1156,10 +1159,19 @@ function handleSubmit(btn) {
     }, 2000);
     return;
   }
+
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+
+  await fetch('https://formspree.io/f/https://formspree.io/f/xnjgknkq', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, tipo, sector })
+  });
+
   btn.textContent = '✓ ¡Perfecto! Te avisamos pronto';
   btn.style.background = '#00e676';
   btn.style.color = '#060810';
-  btn.disabled = true;
 }
 
 // ── SMOOTH ANCHOR SCROLL ───────────────────────────────────────────────────
