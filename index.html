@@ -1102,7 +1102,7 @@ footer {
       <button
         class="form-submit"
         type="button"
-        onclick="window.location.href='https://salesduo-tan.vercel.app'">
+        onclick="handleSubmit(this)">
         Quiero acceso gratuito a la Beta →
       </button>
       <p style="text-align:center;font-size:0.75rem;color:var(--gray2);margin-top:1rem;">
@@ -1151,14 +1151,14 @@ window.addEventListener('scroll', () => {
 // ── FORM SUBMIT ────────────────────────────────────────────────────────────
 async function handleSubmit(btn) {
   const form = btn.closest('.demo-form');
-  const name = form.querySelector('input[type="text"]').value;
-  const email = form.querySelector('input[type="email"]').value;
+  const name = form.querySelector('input[type="text"]').value.trim();
+  const email = form.querySelector('input[type="email"]').value.trim();
   const tipo = form.querySelectorAll('select')[0].value;
   const sector = form.querySelectorAll('select')[1].value;
 
-  if (!name || !email) {
+  if (!name || !email || !tipo || !sector) {
     btn.style.background = '#ff4d6d';
-    btn.textContent = 'Completa tu nombre y email';
+    btn.textContent = 'Rellena todos los campos';
     setTimeout(() => {
       btn.style.background = '';
       btn.textContent = 'Quiero acceso gratuito a la Beta →';
@@ -1166,21 +1166,9 @@ async function handleSubmit(btn) {
     return;
   }
 
-  btn.textContent = 'Enviando...';
+  btn.textContent = 'Abriendo app...';
   btn.disabled = true;
-
-  await fetch('https://formspree.io/f/xnjgknkq', {
-    method: 'POST',
-    headers: { 
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify({ name, email, tipo, sector })
-  });
-
-  btn.textContent = '✓ ¡Perfecto! Te avisamos pronto';
-  btn.style.background = '#00e676';
-  btn.style.color = '#060810';
+  window.location.href = 'https://salesduo-tan.vercel.app';
 }
 
 // ── SMOOTH ANCHOR SCROLL ───────────────────────────────────────────────────
