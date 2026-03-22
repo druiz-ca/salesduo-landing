@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duo Sales — Entrena tus ventas con IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060810;
+  --surface: #0c1018;
+  --surface2: #111620;
+  --border: rgba(255,255,255,0.07);
+  --brand: #00d4ff;
+  --brand2: #0091ff;
+  --green: #00e676;
+  --white: #ffffff;
+  --gray: rgba(255,255,255,0.55);
+  --gray2: rgba(255,255,255,0.28);
+  --red: #ff4d6d;
+  --glow: rgba(0,212,255,0.15);
+  --radius: 20px;
+  --font-display: 'DM Serif Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ── NOISE OVERLAY ──────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1000;
+  opacity: 0.4;
+}
+
+/* ── NAV ──────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5vw;
+  height: 72px;
+  background: rgba(6,8,16,0.7);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--brand); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  color: var(--gray); font-size: 0.875rem; font-weight: 400;
+  text-decoration: none; letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--brand); color: var(--bg) !important;
+  padding: 0.55rem 1.4rem; border-radius: 50px;
+  font-weight: 600 !important; font-size: 0.85rem !important;
+  transition: all 0.2s !important;
+}
+.nav-cta:hover { background: white !important; transform: scale(1.03); }
+
+/* ── HERO ──────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 140px 5vw 80px;
+  position: relative; overflow: hidden;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: float 8s ease-in-out infinite;
+}
+.orb1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,145,255,0.18) 0%, transparent 70%);
+  top: -100px; left: -100px;
+}
+.orb2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%);
+  bottom: -80px; right: -80px;
+  animation-delay: -4s;
+}
+.orb3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(0,230,118,0.08) 0%, transparent 70%);
+  top: 40%; left: 50%; transform: translate(-50%,-50%);
+  animation-delay: -2s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-30px) scale(1.05); }
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.2);
+  padding: 0.45rem 1.1rem; border-radius: 50px;
+  font-size: 0.8rem; font-weight: 500;
+  color: var(--brand); letter-spacing: 0.05em;
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--brand);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  max-width: 14ch;
+  margin: 0 auto 1.5rem;
+  opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+}
+.hero-headline em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: var(--gray);
+  max-width: 540px; margin: 0 auto 3rem;
+  font-weight: 300; line-height: 1.7;
+  opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+}
+
+.hero-actions {
+  display: flex; gap: 1rem; align-items: center; justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.9s 0.65s forwards;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: var(--bg);
+  padding: 1rem 2.4rem; border-radius: 50px;
+  font-size: 0.95rem; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  transition: all 0.25s;
+  box-shadow: 0 0 40px rgba(0,212,255,0.3);
+  letter-spacing: -0.01em;
+}
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 60px rgba(0,212,255,0.5);
+  background: white;
+}
+.btn-secondary {
+  color: var(--gray);
+  padding: 1rem 2rem; border-radius: 50px;
+  font-size: 0.95rem; font-weight: 400;
+  text-decoration: none; border: 1px solid var(--border);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  transition: all 0.25s; background: transparent; cursor: pointer;
+}
+.btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  color: var(--gray2); font-size: 0.7rem; letter-spacing: 0.1em;
+  animation: fadeUp 1s 1.2s forwards; opacity: 0;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--brand), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%,100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(0.7); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── APP MOCKUP ───────────────────────────────────────────── */
+.hero-mockup {
+  width: 100%; max-width: 900px; margin: 5rem auto 0;
+  position: relative;
+  opacity: 0; animation: fadeUp 1s 0.8s forwards;
+}
+.mockup-glow {
+  position: absolute; inset: -40px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0,145,255,0.12), transparent 70%);
+  pointer-events: none;
+}
+.mockup-frame {
+  background: var(--surface2);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 50px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset;
+}
+.mockup-bar {
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-r { background: #ff5f57; }
+.dot-y { background: #ffbd2e; }
+.dot-g { background: #28c840; }
+.mockup-url {
+  flex: 1; margin: 0 1rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.35rem 1rem;
+  font-size: 0.75rem; color: var(--gray2);
+  text-align: center;
+}
+.mockup-inner { padding: 2.5rem; }
+
+/* Chat UI inside mockup */
+.chat-ui {
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.chat-header-ui {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+}
+.chat-persona {
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.persona-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, #0091ff, #00d4ff);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+}
+.persona-info h4 { font-size: 0.9rem; font-weight: 500; }
+.persona-info p { font-size: 0.75rem; color: var(--gray2); }
+.score-badge {
+  background: rgba(0,230,118,0.1);
+  border: 1px solid rgba(0,230,118,0.25);
+  color: var(--green);
+  padding: 0.35rem 0.9rem; border-radius: 50px;
+  font-size: 0.8rem; font-weight: 600;
+}
+
+.messages { display: flex; flex-direction: column; gap: 0.75rem; margin: 1rem 0; }
+.msg { max-width: 72%; padding: 0.85rem 1.1rem; border-radius: 16px; font-size: 0.875rem; line-height: 1.5; }
+.msg-client { background: var(--surface); border: 1px solid var(--border); color: var(--gray); align-self: flex-start; border-radius: 4px 16px 16px 16px; }
+.msg-user { background: linear-gradient(135deg, #0050aa, #0091ff); color: white; align-self: flex-end; border-radius: 16px 4px 16px 16px; }
+.msg-feedback {
+  background: rgba(0,230,118,0.06);
+  border: 1px solid rgba(0,230,118,0.15);
+  border-left: 3px solid var(--green);
+  padding: 0.75rem 1rem; border-radius: 0 12px 12px 0;
+  font-size: 0.8rem; color: rgba(0,230,118,0.8);
+  display: flex; gap: 0.5rem; align-items: flex-start;
+  align-self: stretch;
+}
+
+.typing-indicator { display: flex; gap: 4px; align-items: center; padding: 0.85rem 1.1rem; }
+.typing-indicator span {
+  width: 7px; height: 7px; background: var(--gray2); border-radius: 50%;
+  animation: typingBounce 1.2s ease-in-out infinite;
+}
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce {
+  0%,60%,100% { transform: translateY(0); }
+  30% { transform: translateY(-8px); }
+}
+
+.chat-input-ui {
+  display: flex; gap: 0.75rem; align-items: center;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 0.75rem 1rem;
+}
+.chat-input-ui input {
+  flex: 1; background: transparent; border: none; outline: none;
+  color: var(--gray); font-size: 0.875rem; font-family: var(--font-body);
+}
+.chat-input-ui input::placeholder { color: var(--gray2); }
+.send-btn {
+  background: var(--brand); color: var(--bg); border: none;
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0; font-size: 1rem;
+}
+
+/* ── SECTION BASE ─────────────────────────────────────────── */
+section { padding: 120px 5vw; }
+.container { max-width: 1100px; margin: 0 auto; }
+
+.section-label {
+  display: inline-block;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--brand); margin-bottom: 1.2rem;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.1; letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+.section-title em { font-style: italic; color: var(--brand); }
+.section-sub {
+  font-size: 1.05rem; color: var(--gray);
+  max-width: 540px; line-height: 1.7; font-weight: 300;
+}
+
+/* ── STATS BAR ────────────────────────────────────────────── */
+#stats {
+  padding: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.stats-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.stat-item {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid var(--border);
+  text-align: center;
+  transition: background 0.3s;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: rgba(0,212,255,0.03); }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 3rem; line-height: 1;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--white), var(--brand));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label { font-size: 0.85rem; color: var(--gray); font-weight: 300; }
+
+/* ── PROBLEM SECTION ──────────────────────────────────────── */
+#problem { background: var(--bg); }
+.problem-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  margin-top: 4rem;
+}
+.problem-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  position: relative; overflow: hidden;
+  transition: all 0.35s;
+}
+.problem-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,77,109,0.4), transparent);
+  opacity: 0; transition: opacity 0.35s;
+}
+.problem-card:hover { border-color: rgba(255,77,109,0.25); transform: translateY(-4px); }
+.problem-card:hover::before { opacity: 1; }
+.problem-icon {
+  font-size: 2.5rem; margin-bottom: 1.5rem; display: block;
+}
+.problem-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem; letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+.problem-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+.problem-card .cost {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255,77,109,0.06);
+  border: 1px solid rgba(255,77,109,0.15);
+  border-radius: 10px;
+  font-size: 0.8rem; color: #ff8fa3; font-weight: 500;
+}
+
+.problem-full {
+  background: var(--surface2);
+  border: 1px solid rgba(0,212,255,0.15);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  grid-column: 1 / -1;
+  display: flex; gap: 4rem; align-items: center;
+}
+.problem-full-text { flex: 1; }
+.problem-stat-big {
+  text-align: center; flex-shrink: 0;
+}
+.problem-stat-big .big-num {
+  font-family: var(--font-display);
+  font-size: 5rem; line-height: 1;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.problem-stat-big p { font-size: 0.85rem; color: var(--gray); margin-top: 0.5rem; max-width: 180px; }
+
+/* ── HOW IT WORKS ─────────────────────────────────────────── */
+#how { background: var(--surface); }
+.steps {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  margin-top: 5rem;
+}
+.step {
+  position: relative;
+  opacity: 0; transform: translateY(30px);
+  transition: all 0.6s;
+}
+.step.visible { opacity: 1; transform: translateY(0); }
+.step-num {
+  font-family: var(--font-display); font-size: 5rem;
+  color: rgba(255,255,255,0.04); line-height: 1;
+  position: absolute; top: -1.5rem; left: 0;
+  pointer-events: none;
+}
+.step-inner {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem 2rem;
+  height: 100%;
+  transition: all 0.35s;
+}
+.step-inner:hover {
+  border-color: rgba(0,212,255,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,212,255,0.1) inset;
+}
+.step-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0,145,255,0.15), rgba(0,212,255,0.08));
+  border: 1px solid rgba(0,212,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin-bottom: 1.5rem;
+}
+.step-inner h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem; letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+.step-inner p { color: var(--gray); font-size: 0.88rem; line-height: 1.7; }
+
+.steps-connector {
+  display: flex; align-items: center; justify-content: center;
+  gap: 2rem; margin-top: 3rem;
+}
+.connector-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent);
+}
+
+/* ── WHO IS IT FOR ────────────────────────────────────────── */
+#who { background: var(--bg); }
+.who-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 4rem;
+}
+.who-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 3rem;
+  position: relative; overflow: hidden;
+  transition: all 0.35s;
+  opacity: 0; transform: translateY(30px);
+}
+.who-card.visible { opacity: 1; transform: translateY(0); }
+.who-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--brand), transparent);
+  opacity: 0; transition: opacity 0.35s;
+}
+.who-card:hover { border-color: rgba(0,212,255,0.2); transform: translateY(-6px); }
+.who-card:hover::after { opacity: 1; }
+.who-tag {
+  display: inline-block;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 0.35rem 0.9rem;
+  border-radius: 50px; margin-bottom: 1.5rem;
+}
+.tag-b2c { background: rgba(0,212,255,0.1); color: var(--brand); border: 1px solid rgba(0,212,255,0.2); }
+.tag-b2b { background: rgba(0,230,118,0.1); color: var(--green); border: 1px solid rgba(0,230,118,0.2); }
+.who-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem; letter-spacing: -0.02em; margin-bottom: 1rem;
+}
+.who-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; }
+.who-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.who-features li {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-size: 0.875rem; color: rgba(255,255,255,0.75);
+}
+.who-features li::before {
+  content: '✓';
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(0,212,255,0.12);
+  border: 1px solid rgba(0,212,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; color: var(--brand); flex-shrink: 0;
+}
+
+/* ── SECTORS ──────────────────────────────────────────────── */
+#sectors { background: var(--surface); overflow: hidden; }
+.sectors-scroll {
+  display: flex; gap: 1rem; margin-top: 3rem;
+  animation: scrollLeft 20s linear infinite;
+  width: max-content;
+}
+.sectors-scroll:hover { animation-play-state: paused; }
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.sector-pill {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 0.75rem 1.5rem; border-radius: 50px;
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 0.6rem;
+  font-size: 0.875rem; font-weight: 400;
+  transition: all 0.25s; cursor: default;
+}
+.sector-pill:hover { border-color: rgba(0,212,255,0.3); color: var(--brand); }
+.sector-pill .emoji { font-size: 1rem; }
+
+/* ── ROI SECTION ──────────────────────────────────────────── */
+#roi { background: var(--bg); }
+.roi-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  margin-top: 4rem;
+}
+.roi-table {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+}
+.roi-table-header {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.roi-th {
+  padding: 1rem 1.2rem; font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray2);
+}
+.roi-th:last-child { color: var(--green); }
+.roi-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.roi-row:last-child { border-bottom: none; }
+.roi-row:hover { background: rgba(255,255,255,0.02); }
+.roi-cell {
+  padding: 1rem 1.2rem; font-size: 0.875rem;
+}
+.roi-cell:first-child { color: var(--gray); }
+.roi-cell.red { color: #ff8fa3; font-weight: 500; }
+.roi-cell.green { color: var(--green); font-weight: 500; }
+
+.roi-kpis { display: flex; flex-direction: column; gap: 1.5rem; }
+.roi-kpi {
+  padding: 1.75rem 2rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: all 0.3s;
+}
+.roi-kpi:hover { border-color: rgba(0,212,255,0.2); }
+.roi-kpi-val {
+  font-family: var(--font-display);
+  font-size: 2.5rem; line-height: 1;
+  background: linear-gradient(135deg, var(--white), var(--brand));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: 0.4rem;
+}
+.roi-kpi-label { font-size: 0.85rem; color: var(--gray); }
+
+/* ── CTA / DEMO FORM ──────────────────────────────────────── */
+#demo {
+  background: var(--bg);
+  text-align: center;
+  padding: 140px 5vw;
+  position: relative; overflow: hidden;
+}
+.demo-orb {
+  position: absolute;
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,145,255,0.08) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+.demo-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.demo-inner .section-title { font-size: clamp(2.2rem, 4.5vw, 4rem); }
+
+.demo-form {
+  margin-top: 3rem;
+  background: var(--surface2);
+  border: 1px solid rgba(0,212,255,0.15);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  text-align: left;
+  box-shadow: 0 0 80px rgba(0,145,255,0.08);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+.form-group label { font-size: 0.78rem; font-weight: 500; color: var(--gray); letter-spacing: 0.05em; }
+.form-group input,
+.form-group select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  color: var(--white); font-size: 0.9rem;
+  font-family: var(--font-body); font-weight: 300;
+  outline: none; transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.form-group input::placeholder { color: var(--gray2); }
+.form-group input:focus,
+.form-group select:focus { border-color: rgba(0,212,255,0.4); }
+.form-group select option { background: var(--surface2); }
+.form-submit {
+  width: 100%; padding: 1.1rem;
+  background: var(--brand); color: var(--bg);
+  border: none; border-radius: 12px;
+  font-size: 1rem; font-weight: 600;
+  font-family: var(--font-body); cursor: pointer;
+  transition: all 0.25s; margin-top: 0.5rem;
+  box-shadow: 0 0 30px rgba(0,212,255,0.25);
+  letter-spacing: -0.01em;
+}
+.form-submit:hover {
+  background: white;
+  box-shadow: 0 0 50px rgba(0,212,255,0.4);
+  transform: translateY(-1px);
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 3rem 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1.5rem;
+}
+.footer-logo {
+  font-family: var(--font-display); font-size: 1.2rem;
+  color: var(--white); text-decoration: none;
+}
+.footer-logo span { color: var(--brand); }
+.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links a { color: var(--gray2); font-size: 0.85rem; text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+.footer-copy { color: var(--gray2); font-size: 0.78rem; }
+
+/* ── SCROLL REVEAL ───────────────────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .problem-grid, .who-grid, .roi-grid, .form-row { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .problem-full { flex-direction: column; gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Duo<span>Sales</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">Cómo funciona</a></li>
+    <li><a href="#who">Para quién</a></li>
+    <li><a href="#roi">ROI</a></li>
+    <li><a href="#demo" class="nav-cta">Pedir Demo</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-orb orb3"></div>
+
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Beta abierta — Acceso gratuito limitado
+  </div>
+
+  <h1 class="hero-headline">
+    Entrena ventas.<br><em>Cierra más.</em>
+  </h1>
+
+  <p class="hero-sub">
+    Como Duolingo, pero para aprender a vender. Practica objeciones reales con IA antes de llamar a tus clientes.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#demo" class="btn-primary">
+      Solicitar demo gratuita
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#how" class="btn-secondary">
+      Ver cómo funciona
+    </a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+
+  <!-- APP MOCKUP -->
+  <div class="hero-mockup">
+    <div class="mockup-glow"></div>
+    <div class="mockup-frame">
+      <div class="mockup-bar">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <div class="mockup-url">app.duosales.io</div>
+      </div>
+      <div class="mockup-inner">
+        <div class="chat-ui">
+          <div class="chat-header-ui">
+            <div class="chat-persona">
+              <div class="persona-avatar">🤖</div>
+              <div class="persona-info">
+                <h4>Carlos Méndez — Director de Operaciones</h4>
+                <p>Empresa logística · 80 personas · Objeción: precio</p>
+              </div>
+            </div>
+            <div class="score-badge">🏆 +80 pts</div>
+          </div>
+          <div class="messages">
+            <div class="msg msg-client">
+              "Me parece interesante, pero es bastante caro para lo que ofrecéis."
+            </div>
+            <div class="msg msg-user">
+              "Entiendo la preocupación por el coste. ¿Cuánto os cuesta ahora mismo formar a un comercial nuevo hasta que sea productivo?"
+            </div>
+            <div class="msg-feedback">
+              ✦ &nbsp;<span>Excelente — usaste la técnica de <strong>coste de no-acción</strong>. Carlos está reconsiderando. +40 pts</span>
+            </div>
+            <div class="msg msg-client" style="opacity:0.6;">
+              <div class="typing-indicator"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          <div class="chat-input-ui">
+            <input type="text" placeholder="Escribe tu respuesta de ventas..." disabled>
+            <button class="send-btn">↑</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-num">#1</div>
+      <div class="stat-label">Categoría en ofertas de empleo (InfoJobs)</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Carreras universitarias de ventas en España</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">3–6x</div>
+      <div class="stat-label">ROI para empresas en el primer mes</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">€0</div>
+      <div class="stat-label">Coste para empezar — Beta gratuita</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">El Problema</span>
+      <h2 class="section-title">Las empresas queman su<br><em>mejor activo</em> formando comerciales</h2>
+      <p class="section-sub">Cuando un comercial nuevo aprende a vender, lo hace con clientes reales. Eso cuesta dinero, oportunidades y reputación.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <span class="problem-icon">🏢</span>
+        <h3>El problema de las empresas</h3>
+        <p>Cuando contratas 5 comerciales nuevos, los pones a llamar a contactos de bases de datos compradas mientras aprenden. Esos contactos quedan quemados antes de que estén listos.</p>
+        <div class="cost">€800–1.500 en bases de datos + oportunidades perdidas cada incorporación</div>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:0.1s">
+        <span class="problem-icon">📞</span>
+        <h3>El problema del comercial</h3>
+        <p>Los closers y vendedores freelance necesitan practicar objeciones constantemente. La única opción es hacerlo con compañeros o directamente con clientes reales — los dos son costosos.</p>
+        <div class="cost">El 60% de los clientes dice NO más de 5 veces antes de comprar</div>
+      </div>
+      <div class="problem-full reveal" style="transition-delay:0.2s">
+        <div class="problem-full-text">
+          <h3 style="font-family:var(--font-display);font-size:1.5rem;letter-spacing:-0.02em;margin-bottom:0.75rem;">Vender es el oficio con más demanda y menos formación</h3>
+          <p style="color:var(--gray);font-size:0.9rem;line-height:1.7;">"Comercial / Ventas" lidera las ofertas activas en InfoJobs año tras año. Sin embargo no existe ninguna carrera universitaria de ventas en España. El mito de que "vendedor se nace" ha dejado sin formación estructurada a millones de personas con talento real.</p>
+        </div>
+        <div class="problem-stat-big">
+          <div class="big-num">3M+</div>
+          <p>personas en paro que rechazan ofertas de ventas por falta de confianza</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div style="text-align:center;" class="reveal">
+      <span class="section-label">Cómo funciona</span>
+      <h2 class="section-title">Aprende la técnica.<br>Luego practica con el <em>cliente</em>.</h2>
+      <p class="section-sub" style="margin:0 auto;">Cada lección tiene dos pasos: teoría de la técnica y simulación real con un cliente IA que pone las objeciones más difíciles.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-inner">
+          <div class="step-icon">🎯</div>
+          <h3>Elige tu sector</h3>
+          <p>Seguros, inmobiliario, infoproductos, Kit Digital, telecomunicaciones, B2B genérico. La IA se adapta al lenguaje y objeciones específicas de tu mercado.</p>
+        </div>
+      </div>
+      <div class="step" style="transition-delay:0.15s">
+        <div class="step-num">02</div>
+        <div class="step-inner">
+          <div class="step-icon">📚</div>
+          <h3>Aprende la técnica</h3>
+          <p>Diapositivas cortas con la teoría, ejemplos correctos e incorrectos. Desde manejo del precio hasta creación de urgencia. Sólo lo que funciona en la práctica.</p>
+        </div>
+      </div>
+      <div class="step" style="transition-delay:0.3s">
+        <div class="step-num">03</div>
+        <div class="step-inner">
+          <div class="step-icon">🤖</div>
+          <h3>Practica con IA</h3>
+          <p>Un cliente simulado con personalidad, dolor oculto y objeciones reales. Feedback inmediato sobre cada respuesta, puntuación y consejos para mejorar.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature list -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem;" class="reveal">
+      <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;">🏆</div>
+        <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">Gamificado</div>
+        <div style="font-size:0.78rem;color:var(--gray2);">XP, rachas, badges</div>
+      </div>
+      <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;">📊</div>
+        <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">Progreso real</div>
+        <div style="font-size:0.78rem;color:var(--gray2);">Dashboard personal</div>
+      </div>
+      <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;">🗣️</div>
+        <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">Feedback instantáneo</div>
+        <div style="font-size:0.78rem;color:var(--gray2);">Técnica detectada</div>
+      </div>
+      <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;">🌍</div>
+        <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">100% en español</div>
+        <div style="font-size:0.78rem;color:var(--gray2);">LATAM incluido</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section id="who">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Para quién es</span>
+      <h2 class="section-title">Un solo producto.<br>Dos <em>puertas</em> de entrada.</h2>
+      <p class="section-sub">Tanto si eres un comercial que quiere mejorar solo, como si diriges un equipo de ventas.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-card">
+        <span class="who-tag tag-b2c">Particular — B2C</span>
+        <h3>Para el comercial individual</h3>
+        <p>Closers freelance, setters, vendedores telefónicos, profesionales que quieren cambiar de trabajo o mejorar sus resultados.</p>
+        <ul class="who-features">
+          <li>Practica a tu ritmo, cuando quieras</li>
+          <li>Elige el sector en el que trabajas</li>
+          <li>Feedback inmediato en cada respuesta</li>
+          <li>Historial de progreso personal</li>
+          <li>Acceso desde móvil o escritorio</li>
+        </ul>
+      </div>
+      <div class="who-card" style="transition-delay:0.15s">
+        <span class="who-tag tag-b2b">Empresa — B2B</span>
+        <h3>Para el equipo comercial</h3>
+        <p>Empresas que incorporan comerciales nuevos o quieren que su equipo practique sin quemar bases de datos reales.</p>
+        <ul class="who-features" style="--color: var(--green)">
+          <li>Panel de manager con progreso del equipo</li>
+          <li>Decide quién pasa a llamadas reales</li>
+          <li>Preserva el 100% de tu base de datos</li>
+          <li>Reduce tiempo de onboarding 60%</li>
+          <li>ROI desde el primer mes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section id="sectors">
+  <div class="container">
+    <div style="text-align:center;" class="reveal">
+      <span class="section-label">Sectores disponibles</span>
+      <h2 class="section-title">Tu sector.<br>Tus <em>objeciones</em>.</h2>
+    </div>
+  </div>
+  <div class="sectors-scroll" style="margin-top:3rem;">
+    <div class="sector-pill"><span class="emoji">🏠</span> Inmobiliario</div>
+    <div class="sector-pill"><span class="emoji">🛡️</span> Seguros</div>
+    <div class="sector-pill"><span class="emoji">💻</span> Kit Digital / Software</div>
+    <div class="sector-pill"><span class="emoji">🎓</span> Infoproductos</div>
+    <div class="sector-pill"><span class="emoji">📱</span> Telecomunicaciones</div>
+    <div class="sector-pill"><span class="emoji">🤝</span> B2B Genérico</div>
+    <div class="sector-pill"><span class="emoji">🏋️</span> Fitness / Salud</div>
+    <div class="sector-pill"><span class="emoji">🚗</span> Automoción</div>
+    <div class="sector-pill"><span class="emoji">💰</span> Finanzas / Inversión</div>
+    <div class="sector-pill"><span class="emoji">🏠</span> Inmobiliario</div>
+    <div class="sector-pill"><span class="emoji">🛡️</span> Seguros</div>
+    <div class="sector-pill"><span class="emoji">💻</span> Kit Digital / Software</div>
+    <div class="sector-pill"><span class="emoji">🎓</span> Infoproductos</div>
+    <div class="sector-pill"><span class="emoji">📱</span> Telecomunicaciones</div>
+    <div class="sector-pill"><span class="emoji">🤝</span> B2B Genérico</div>
+    <div class="sector-pill"><span class="emoji">🏋️</span> Fitness / Salud</div>
+    <div class="sector-pill"><span class="emoji">🚗</span> Automoción</div>
+    <div class="sector-pill"><span class="emoji">💰</span> Finanzas / Inversión</div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section id="roi">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">ROI Real</span>
+      <h2 class="section-title">¿Cuánto le cuesta<br>a tu empresa <em>no usar</em> esto?</h2>
+      <p class="section-sub">Caso real: empresa que incorpora 5 comerciales nuevos (seguros, Kit Digital, inmobiliario).</p>
+    </div>
+    <div class="roi-grid">
+      <div class="roi-table reveal">
+        <div class="roi-table-header">
+          <div class="roi-th">Concepto</div>
+          <div class="roi-th">Sin Duo Sales</div>
+          <div class="roi-th">Con Duo Sales</div>
+        </div>
+        <div class="roi-row">
+          <div class="roi-cell">Base de datos</div>
+          <div class="roi-cell red">€800–1.500 quemada</div>
+          <div class="roi-cell green">100% preservada</div>
+        </div>
+        <div class="roi-row">
+          <div class="roi-cell">Coste mensual</div>
+          <div class="roi-cell red">€1.200+ (manager)</div>
+          <div class="roi-cell green">€395/mes</div>
+        </div>
+        <div class="roi-row">
+          <div class="roi-cell">Tiempo de rodaje</div>
+          <div class="roi-cell red">2–3 meses</div>
+          <div class="roi-cell green">3–4 semanas</div>
+        </div>
+        <div class="roi-row">
+          <div class="roi-cell">Supervisión manager</div>
+          <div class="roi-cell red">40h/comercial nuevo</div>
+          <div class="roi-cell green">Reducción del 60%</div>
+        </div>
+        <div class="roi-row">
+          <div class="roi-cell">Oportunidades perdidas</div>
+          <div class="roi-cell red">Incuantificables</div>
+          <div class="roi-cell green">Cero</div>
+        </div>
+      </div>
+      <div class="roi-kpis reveal" style="transition-delay:0.15s">
+        <div class="roi-kpi">
+          <div class="roi-kpi-val">3–6x</div>
+          <div class="roi-kpi-label">ROI en el primer mes para empresas</div>
+        </div>
+        <div class="roi-kpi">
+          <div class="roi-kpi-val">€395</div>
+          <div class="roi-kpi-label">Coste mensual para 5 comerciales (Starter)</div>
+        </div>
+        <div class="roi-kpi">
+          <div class="roi-kpi-val">–60%</div>
+          <div class="roi-kpi-label">Reducción de tiempo de supervisión del manager</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO FORM -->
+<section id="demo">
+  <div class="demo-orb"></div>
+  <div class="demo-inner">
+    <span class="section-label reveal">Acceso Beta Gratuito</span>
+    <h2 class="section-title reveal">Pruébalo ahora.<br>Sin <em>tarjeta</em>, sin compromiso.</h2>
+    <p class="section-sub reveal" style="margin: 0 auto 0;">Consigue acceso gratuito a la beta y sé de los primeros en entrenar con IA.</p>
+
+    <div class="demo-form reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label>NOMBRE</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label>EMAIL</label>
+          <input type="email" placeholder="tu@email.com">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>SOY</label>
+          <select>
+            <option value="" disabled selected>¿Eres particular o empresa?</option>
+            <option>Comercial / Closer / Setter individual</option>
+            <option>Responsable de equipo comercial</option>
+            <option>Empresa (3+ comerciales)</option>
+            <option>Estudiante / En búsqueda de empleo en ventas</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>SECTOR</label>
+          <select>
+            <option value="" disabled selected>¿En qué sector vendes?</option>
+            <option>Seguros</option>
+            <option>Inmobiliario</option>
+            <option>Software / Kit Digital</option>
+            <option>Infoproductos / Formación</option>
+            <option>Telecomunicaciones</option>
+            <option>B2B Genérico</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+      <button class="form-submit" onclick="handleSubmit(this)">
+        Quiero acceso gratuito a la Beta →
+      </button>
+      <p style="text-align:center;font-size:0.75rem;color:var(--gray2);margin-top:1rem;">
+        Sin spam. Sin tarjeta. Solo te avisamos cuando tu acceso esté listo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Duo<span>Sales</span></a>
+  <ul class="footer-links">
+    <li><a href="#how">Cómo funciona</a></li>
+    <li><a href="#who">Para quién</a></li>
+    <li><a href="#demo">Demo gratuita</a></li>
+    <li><a href="mailto:hola@duosales.io">Contacto</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 Duo Sales · Málaga, España</p>
+</footer>
+
+<script>
+// ── SCROLL REVEAL ──────────────────────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .step, .who-card').forEach(el => observer.observe(el));
+
+// ── NAV SCROLL EFFECT ──────────────────────────────────────────────────────
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    nav.style.background = 'rgba(6,8,16,0.92)';
+    nav.style.borderBottomColor = 'rgba(255,255,255,0.1)';
+  } else {
+    nav.style.background = 'rgba(6,8,16,0.7)';
+    nav.style.borderBottomColor = 'rgba(255,255,255,0.07)';
+  }
+});
+
+// ── FORM SUBMIT ────────────────────────────────────────────────────────────
+function handleSubmit(btn) {
+  const form = btn.closest('.demo-form');
+  const name = form.querySelector('input[type="text"]').value;
+  const email = form.querySelector('input[type="email"]').value;
+  if (!name || !email) {
+    btn.style.background = '#ff4d6d';
+    btn.textContent = 'Completa tu nombre y email';
+    setTimeout(() => {
+      btn.style.background = '';
+      btn.textContent = 'Quiero acceso gratuito a la Beta →';
+    }, 2000);
+    return;
+  }
+  btn.textContent = '✓ ¡Perfecto! Te avisamos pronto';
+  btn.style.background = '#00e676';
+  btn.style.color = '#060810';
+  btn.disabled = true;
+}
+
+// ── SMOOTH ANCHOR SCROLL ───────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ── PARALLAX ORBS ─────────────────────────────────────────────────────────
+window.addEventListener('mousemove', e => {
+  const { clientX, clientY } = e;
+  const { innerWidth, innerHeight } = window;
+  const x = (clientX / innerWidth - 0.5) * 20;
+  const y = (clientY / innerHeight - 0.5) * 20;
+  document.querySelectorAll('.hero-orb').forEach((orb, i) => {
+    const factor = (i + 1) * 0.5;
+    orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+  });
+});
+</script>
+</body>
+</html>
