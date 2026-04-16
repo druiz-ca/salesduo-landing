@@ -897,7 +897,7 @@ footer {
       <div class="step" style="transition-delay:0.15s">
         <div class="step-num">02</div>
         <div class="step-inner">
-          <div class="step-icon"><img src="icons/target.svg" class="icon"></div>
+          <div class="step-icon"><img src="icons/book.svg" class="icon"></div>
           <h3>Aprende la técnica</h3>
           <p>Diapositivas cortas con la teoría, ejemplos correctos e incorrectos. Desde manejo del precio hasta creación de urgencia. Sólo lo que funciona en la práctica.</p>
         </div>
@@ -905,8 +905,8 @@ footer {
       <div class="step" style="transition-delay:0.3s">
         <div class="step-num">03</div>
         <div class="step-inner">
-          <div class="step-icon"><img src="icons/book.svg" class="icon"></div>
-          <h3>Practica con IA</h3>
+          <div class="step-icon"><img src="icons/ai.svg" class="icon"></div>
+          <h3>Simulación hiper realista</h3>
           <p>Un cliente simulado con personalidad, dolor oculto y objeciones reales. Feedback inmediato sobre cada respuesta, puntuación y consejos para mejorar.</p>
         </div>
       </div>
@@ -920,17 +920,17 @@ footer {
         <div style="font-size:0.78rem;color:var(--gray2);">XP, rachas, badges</div>
       </div>
       <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
-        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/trophy.svg" class="icon"></div>
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/chart.svg" class="icon"></div>
         <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">Progreso real</div>
         <div style="font-size:0.78rem;color:var(--gray2);">Dashboard personal</div>
       </div>
       <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
-        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/chart.svg" class="icon"></div>
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/speech.svg" class="icon"></div>
         <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">Feedback instantáneo</div>
         <div style="font-size:0.78rem;color:var(--gray2);">Técnica detectada</div>
       </div>
       <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
-        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/speech.svg" class="icon"></div>
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/globe.svg" class="icon"></div>
         <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">100% en español</div>
         <div style="font-size:0.78rem;color:var(--gray2);">LATAM incluido</div>
       </div>
@@ -1132,7 +1132,7 @@ footer {
     <li><a href="#how">Cómo funciona</a></li>
     <li><a href="#who">Para quién</a></li>
     <li><a href="#demo">Demo gratuita</a></li>
-    <li><a href="mailto:hola@duosales.io">Contacto</a></li>
+    <li><a href="mailto:salesduoapp@gmail.com">Contacto</a></li>
   </ul>
   <p class="footer-copy">© 2026 SalesDuo - España</p>
 </footer>
@@ -1162,6 +1162,23 @@ window.addEventListener('scroll', () => {
 });
 
 // ── FORM SUBMIT ────────────────────────────────────────────────────────────
+const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/gm4bcobbujwf5o6iewmoerhuy2l9wh9b';
+
+async function sendLeadToMake(payload) {
+  try {
+    await fetch(MAKE_WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    });
+  } catch (error) {
+    console.error('Error enviando a Make:', error);
+  }
+}
+
 async function handleSubmit(btn) {
   const form = btn.closest('.demo-form');
   const name = form.querySelector('input[type="text"]').value.trim();
@@ -1181,6 +1198,20 @@ async function handleSubmit(btn) {
 
   btn.textContent = 'Abriendo app...';
   btn.disabled = true;
+
+  await Promise.race([
+    sendLeadToMake({
+      evento: 'lead_submit',
+      nombre: name,
+      email,
+      tipo,
+      sector,
+      fecha: new Date().toISOString(),
+      origen: 'Landing Vercel'
+    }),
+    new Promise((resolve) => setTimeout(resolve, 1200))
+  ]);
+
   window.location.href = 'https://salesduo-tan.vercel.app';
 }
 
@@ -1204,6 +1235,17 @@ window.addEventListener('mousemove', e => {
   document.querySelectorAll('.hero-orb').forEach((orb, i) => {
     const factor = (i + 1) * 0.5;
     orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+  });
+});
+
+document.querySelectorAll('.nav-cta, .btn-primary').forEach((cta) => {
+  cta.addEventListener('click', () => {
+    sendLeadToMake({
+      evento: 'click_pedir_demo',
+      cta_texto: cta.textContent.trim(),
+      fecha: new Date().toISOString(),
+      origen: 'Landing Vercel'
+    });
   });
 });
 </script>
