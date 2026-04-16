@@ -711,7 +711,20 @@ footer {
   .stats-inner { grid-template-columns: repeat(2, 1fr); }
   .stat-item:nth-child(2) { border-right: none; }
   .problem-full { flex-direction: column; gap: 2rem; }
+
 }
+.icon {
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 6px rgba(0,212,255,0.45));
+}
+
+.step-icon img { width: 28px; height: 28px; }
+.problem-icon img { width: 2.5rem; height: 2.5rem; }
+.persona-avatar img { width: 24px; height: 24px; }
+.score-badge img { width: 16px; height: 16px; margin-right: 6px; }
 </style>
 </head>
 <body>
@@ -775,13 +788,13 @@ footer {
         <div class="chat-ui">
           <div class="chat-header-ui">
             <div class="chat-persona">
-              <div class="persona-avatar">🤖</div>
+              <div class="persona-avatar"><img src="icons/ai.svg" class="icon"></div>
               <div class="persona-info">
                 <h4>Carlos Méndez — Director de Operaciones</h4>
                 <p>Empresa logística · 80 personas · Objeción: precio</p>
               </div>
             </div>
-            <div class="score-badge">🏆 +80 pts</div>
+            <div class="score-badge"><img src="icons/trophy.svg" class="icon"> +80 pts</div>
           </div>
           <div class="messages">
             <div class="msg msg-client">
@@ -839,13 +852,13 @@ footer {
     </div>
     <div class="problem-grid">
       <div class="problem-card reveal">
-        <span class="problem-icon">🏢</span>
+        <span class="problem-icon"><img src="icons/building.svg" class="icon"></span>
         <h3>El problema de las empresas</h3>
         <p>Cuando contratas 5 comerciales nuevos, los pones a llamar a contactos de bases de datos compradas mientras aprenden. Esos contactos quedan quemados antes de que estén listos.</p>
         <div class="cost">€800–1.500 en bases de datos + oportunidades perdidas cada incorporación</div>
       </div>
       <div class="problem-card reveal" style="transition-delay:0.1s">
-        <span class="problem-icon">📞</span>
+        <span class="problem-icon"><img src="icons/phone.svg" class="icon"></span>
         <h3>El problema del comercial</h3>
         <p>Los closers y vendedores freelance necesitan practicar objeciones constantemente. La única opción es hacerlo con compañeros o directamente con clientes reales — los dos son costosos.</p>
         <div class="cost">El 60% de los clientes dice NO más de 5 veces antes de comprar</div>
@@ -876,7 +889,7 @@ footer {
       <div class="step">
         <div class="step-num">01</div>
         <div class="step-inner">
-          <div class="step-icon">🎯</div>
+          <div class="step-icon"><img src="icons/target.svg" class="icon"></div>
           <h3>Elige tu sector</h3>
           <p>Seguros, inmobiliario, infoproductos, Kit Digital, telecomunicaciones, B2B genérico. La IA se adapta al lenguaje y objeciones específicas de tu mercado.</p>
         </div>
@@ -884,7 +897,7 @@ footer {
       <div class="step" style="transition-delay:0.15s">
         <div class="step-num">02</div>
         <div class="step-inner">
-          <div class="step-icon">📚</div>
+          <div class="step-icon"><img src="icons/target.svg" class="icon"></div>
           <h3>Aprende la técnica</h3>
           <p>Diapositivas cortas con la teoría, ejemplos correctos e incorrectos. Desde manejo del precio hasta creación de urgencia. Sólo lo que funciona en la práctica.</p>
         </div>
@@ -892,7 +905,7 @@ footer {
       <div class="step" style="transition-delay:0.3s">
         <div class="step-num">03</div>
         <div class="step-inner">
-          <div class="step-icon">🤖</div>
+          <div class="step-icon"><img src="icons/book.svg" class="icon"></div>
           <h3>Practica con IA</h3>
           <p>Un cliente simulado con personalidad, dolor oculto y objeciones reales. Feedback inmediato sobre cada respuesta, puntuación y consejos para mejorar.</p>
         </div>
@@ -902,22 +915,22 @@ footer {
     <!-- Feature list -->
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem;" class="reveal">
       <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
-        <div style="font-size:1.8rem;margin-bottom:0.75rem;">🏆</div>
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/trophy.svg" class="icon"></div>
         <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">Gamificado</div>
         <div style="font-size:0.78rem;color:var(--gray2);">XP, rachas, badges</div>
       </div>
       <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
-        <div style="font-size:1.8rem;margin-bottom:0.75rem;">📊</div>
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/trophy.svg" class="icon"></div>
         <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">Progreso real</div>
         <div style="font-size:0.78rem;color:var(--gray2);">Dashboard personal</div>
       </div>
       <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
-        <div style="font-size:1.8rem;margin-bottom:0.75rem;">🗣️</div>
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/chart.svg" class="icon"></div>
         <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">Feedback instantáneo</div>
         <div style="font-size:0.78rem;color:var(--gray2);">Técnica detectada</div>
       </div>
       <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
-        <div style="font-size:1.8rem;margin-bottom:0.75rem;">🌍</div>
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/speech.svg" class="icon"></div>
         <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">100% en español</div>
         <div style="font-size:0.78rem;color:var(--gray2);">LATAM incluido</div>
       </div>
@@ -971,24 +984,24 @@ footer {
     </div>
   </div>
   <div class="sectors-scroll" style="margin-top:3rem;">
-    <div class="sector-pill"><span class="emoji">🏠</span> Inmobiliario</div>
-    <div class="sector-pill"><span class="emoji">🛡️</span> Seguros</div>
-    <div class="sector-pill"><span class="emoji">💻</span> Kit Digital / Software</div>
-    <div class="sector-pill"><span class="emoji">🎓</span> Infoproductos</div>
-    <div class="sector-pill"><span class="emoji">📱</span> Telecomunicaciones</div>
-    <div class="sector-pill"><span class="emoji">🤝</span> B2B Genérico</div>
-    <div class="sector-pill"><span class="emoji">🏋️</span> Fitness / Salud</div>
-    <div class="sector-pill"><span class="emoji">🚗</span> Automoción</div>
-    <div class="sector-pill"><span class="emoji">💰</span> Finanzas / Inversión</div>
-    <div class="sector-pill"><span class="emoji">🏠</span> Inmobiliario</div>
-    <div class="sector-pill"><span class="emoji">🛡️</span> Seguros</div>
-    <div class="sector-pill"><span class="emoji">💻</span> Kit Digital / Software</div>
-    <div class="sector-pill"><span class="emoji">🎓</span> Infoproductos</div>
-    <div class="sector-pill"><span class="emoji">📱</span> Telecomunicaciones</div>
-    <div class="sector-pill"><span class="emoji">🤝</span> B2B Genérico</div>
-    <div class="sector-pill"><span class="emoji">🏋️</span> Fitness / Salud</div>
-    <div class="sector-pill"><span class="emoji">🚗</span> Automoción</div>
-    <div class="sector-pill"><span class="emoji">💰</span> Finanzas / Inversión</div>
+    <div class="sector-pill"><img src="icons/house.svg" class="icon"> Inmobiliario</div>
+    <div class="sector-pill"><img src="icons/shield.svg" class="icon"> Seguros</div>
+    <div class="sector-pill"><img src="icons/laptop.svg" class="icon"> Kit Digital / Software</div>
+    <div class="sector-pill"><img src="icons/cap.svg" class="icon"> Infoproductos</div>
+    <div class="sector-pill"><img src="icons/mobile.svg" class="icon"> Telecomunicaciones</div>
+    <div class="sector-pill"><img src="icons/handshake.svg" class="icon"> B2B Genérico</div>
+    <div class="sector-pill"><img src="icons/fitness.svg" class="icon"> Fitness / Salud</div>
+    <div class="sector-pill"><img src="icons/car.svg" class="icon"> Automoción</div>
+    <div class="sector-pill"><img src="icons/money.svg" class="icon"> Finanzas / Inversión</div>
+    <div class="sector-pill"><img src="icons/house.svg" class="icon"> Inmobiliario</div>
+    <div class="sector-pill"><img src="icons/shield.svg" class="icon"> Seguros</div>
+    <div class="sector-pill"><img src="icons/laptop.svg" class="icon"> Kit Digital / Software</div>
+    <div class="sector-pill"><img src="icons/cap.svg" class="icon"> Infoproductos</div>
+    <div class="sector-pill"><img src="icons/mobile.svg" class="icon"> Telecomunicaciones</div>
+    <div class="sector-pill"><img src="icons/handshake.svg" class="icon"> B2B Genérico</div>
+    <div class="sector-pill"><img src="icons/fitness.svg" class="icon"> Fitness / Salud</div>
+    <div class="sector-pill"><img src="icons/car.svg" class="icon"> Automoción</div>
+    <div class="sector-pill"><img src="icons/money.svg" class="icon"> Finanzas / Inversión</div>
   </div>
 </section>
 
@@ -1135,8 +1148,8 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.reveal, .step, .who-card').forEach(el => observer.observe(el));
-
 // ── NAV SCROLL EFFECT ──────────────────────────────────────────────────────
+
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {
   if (window.scrollY > 60) {
