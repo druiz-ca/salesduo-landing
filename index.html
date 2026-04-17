@@ -1180,6 +1180,29 @@ async function sendLeadToMake(payload) {
   }
 }
 
+function trackTopCtas(ctaText) {
+  return sendLeadToMake({
+    evento: 'cta_top_click',
+    cta_grupo: 'top_buttons',
+    cta_texto: ctaText,
+    fecha: new Date().toISOString(),
+    origen: 'Landing Vercel'
+  });
+}
+
+function trackBottomFormCta({ name, email, tipo, sector }) {
+  return sendLeadToMake({
+    evento: 'cta_form_submit',
+    cta_grupo: 'bottom_form_button',
+    nombre: name,
+    email,
+    tipo,
+    sector,
+    fecha: new Date().toISOString(),
+    origen: 'Landing Vercel'
+  });
+}
+
 async function handleSubmit(btn) {
   const form = btn.closest('.demo-form');
   const nameInput = form.querySelector('input[type="text"]');
@@ -1229,14 +1252,11 @@ async function handleSubmit(btn) {
   btn.disabled = true;
 
   await Promise.race([
-    sendLeadToMake({
-      evento: 'lead_submit',
+    trackBottomFormCta({
       nombre: name,
       email,
       tipo,
-      sector,
-      fecha: new Date().toISOString(),
-      origen: 'Landing Vercel'
+      sector
     }),
     new Promise((resolve) => setTimeout(resolve, 1200))
   ]);
@@ -1267,16 +1287,20 @@ window.addEventListener('mousemove', e => {
   });
 });
 
-document.querySelectorAll('.nav-cta, .btn-primary').forEach((cta) => {
-  cta.addEventListener('click', () => {
-    sendLeadToMake({
-      evento: 'click_pedir_demo',
-      cta_texto: cta.textContent.trim(),
-      fecha: new Date().toISOString(),
-      origen: 'Landing Vercel'
-    });
+const navTopCta = document.querySelector('.nav-cta');
+const heroTopCta = document.querySelector('.hero-actions .btn-primary');
+
+if (navTopCta) {
+  navTopCta.addEventListener('click', () => {
+    trackTopCtas(navTopCta.textContent.trim());
   });
-});
+}
+
+if (heroTopCta) {
+  heroTopCta.addEventListener('click', () => {
+    trackTopCtas(heroTopCta.textContent.trim());
+  });
+}
 </script>
 </body>
 </html>
