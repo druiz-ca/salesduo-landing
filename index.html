@@ -1077,17 +1077,17 @@ footer {
       <div class="form-row">
         <div class="form-group">
           <label>NOMBRE</label>
-          <input type="text" placeholder="Tu nombre">
+          <input type="text" placeholder="Tu nombre" required>
         </div>
         <div class="form-group">
           <label>EMAIL</label>
-          <input type="email" placeholder="tu@email.com">
+          <input type="email" placeholder="tu@email.com" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label>SOY</label>
-          <select>
+          <select required>
             <option value="" disabled selected>¿Eres particular o empresa?</option>
             <option>Comercial / Closer / Setter individual</option>
             <option>Responsable de equipo comercial</option>
@@ -1098,7 +1098,7 @@ footer {
         </div>
         <div class="form-group">
           <label>SECTOR</label>
-          <select>
+          <select required>
             <option value="" disabled selected>¿En qué sector vendes?</option>
             <option>Seguros</option>
             <option>Inmobiliario</option>
@@ -1182,18 +1182,46 @@ async function sendLeadToMake(payload) {
 
 async function handleSubmit(btn) {
   const form = btn.closest('.demo-form');
+  const nameInput = form.querySelector('input[type="text"]');
+  const emailInput = form.querySelector('input[type="email"]');
+  const typeSelect = form.querySelectorAll('select')[0];
+  const sectorSelect = form.querySelectorAll('select')[1];
   const name = form.querySelector('input[type="text"]').value.trim();
   const email = form.querySelector('input[type="email"]').value.trim();
   const tipo = form.querySelectorAll('select')[0].value;
   const sector = form.querySelectorAll('select')[1].value;
 
-  if (!name || !email || !tipo || !sector) {
-    btn.style.background = '#ff4d6d';
-    btn.textContent = 'Rellena todos los campos';
-    setTimeout(() => {
-      btn.style.background = '';
-      btn.textContent = 'Quiero acceso gratuito a la Beta →';
-    }, 2000);
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const blockedDomains = new Set(['example.com', 'test.com', 'mailinator.com', 'tempmail.com']);
+  const emailDomain = email.split('@')[1]?.toLowerCase() || '';
+
+  nameInput.setCustomValidity('');
+  emailInput.setCustomValidity('');
+  typeSelect.setCustomValidity('');
+  sectorSelect.setCustomValidity('');
+
+  if (!name) {
+    nameInput.setCustomValidity('Escribe tu nombre.');
+    nameInput.reportValidity();
+    return;
+  }
+
+  if (!emailPattern.test(email)) {
+    emailInput.setCustomValidity('Escribe un email válido. Ejemplo: nombre@dominio.com');
+    emailInput.reportValidity();
+    return;
+  }
+
+  if (blockedDomains.has(emailDomain)) {
+    emailInput.setCustomValidity('Ese dominio no es válido para registrarse.');
+    emailInput.reportValidity();
+    return;
+  }
+
+  if (!tipo || !sector) {
+    if (!tipo) typeSelect.setCustomValidity('Selecciona una opción.');
+    if (!sector) sectorSelect.setCustomValidity('Selecciona un sector.');
+    (tipo ? sectorSelect : typeSelect).reportValidity();
     return;
   }
 
