@@ -1216,7 +1216,21 @@ async function handleSubmit(btn) {
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const blockedDomains = new Set(['example.com', 'test.com', 'mailinator.com', 'tempmail.com']);
+  const commonDomainTypos = new Set([
+    'gmai.com',
+    'gmial.com',
+    'gmail.con',
+    'gmail.coma',
+    'gmail,com',
+    'hotnail.com',
+    'hotmai.com',
+    'outlok.com',
+    'yaho.com',
+    'icloud.con'
+  ]);
+  const typoTlds = new Set(['cmo', 'coom', 'comm', 'con', 'coma', 'vom', 'xom']);
   const emailDomain = email.split('@')[1]?.toLowerCase() || '';
+  const domainTld = emailDomain.includes('.') ? emailDomain.split('.').pop() : '';
 
   nameInput.setCustomValidity('');
   emailInput.setCustomValidity('');
@@ -1231,6 +1245,17 @@ async function handleSubmit(btn) {
 
   if (!emailPattern.test(email)) {
     emailInput.setCustomValidity('Escribe un email válido. Ejemplo: nombre@dominio.com');
+    emailInput.reportValidity();
+    return;
+  }
+
+  if (
+    commonDomainTypos.has(emailDomain)
+    || emailDomain.includes(',')
+    || emailDomain.includes('..')
+    || typoTlds.has(domainTld)
+  ) {
+    emailInput.setCustomValidity('Revisa el dominio del email (por ejemplo: gmail.com). Parece que tiene un error tipográfico.');
     emailInput.reportValidity();
     return;
   }
@@ -1253,7 +1278,7 @@ async function handleSubmit(btn) {
 
   await Promise.race([
     trackBottomFormCta({
-      nombre: name,
+      name,
       email,
       tipo,
       sector
