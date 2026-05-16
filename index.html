@@ -1301,9 +1301,8 @@ async function handleSubmit(btn) {
   formData.append('tipo', tipo);
   formData.append('sector', sector);
 
-  const res = await fetch(MAKE_WEBHOOK_URL, { method: 'POST', body: formData });
-  const { url } = await res.json();
-  window.location.href = url;
+  fetch(MAKE_WEBHOOK_URL, { method: 'POST', body: formData });
+  window.location.href = 'https://salesduo-tan.vercel.app?product=mvp';
 }
 
 // ── SMOOTH ANCHOR SCROLL ───────────────────────────────────────────────────
