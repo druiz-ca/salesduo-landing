@@ -1304,10 +1304,16 @@ async function handleSubmit(btn) {
   try {
     const res = await fetch(MAKE_WEBHOOK_URL, { method: 'POST', body: formData });
     const data = await res.json();
-    window.location.href = data.url || 'https://salesduo-tan.vercel.app?product=mvp';
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error('Make no devolvió una URL: ' + JSON.stringify(data));
+    }
   } catch (err) {
     console.error('Error al conectar con Make:', err);
-    window.location.href = 'https://salesduo-tan.vercel.app?product=mvp';
+    btn.textContent = 'Error — inténtalo de nuevo';
+    btn.disabled = false;
+    btn.style.background = 'var(--red)';
   }
 }
 
