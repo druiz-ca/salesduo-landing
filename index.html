@@ -1299,7 +1299,7 @@ async function handleSubmit(btn) {
     const res = await fetch(MAKE_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, tipo, sector }),
+      body: JSON.stringify({ name, email, tipo, sector, evento: 'cta_form_submit', nombre: name }),
     });
     const data = await res.json();
     if (data.url) {
