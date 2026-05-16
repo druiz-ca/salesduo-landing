@@ -5,6 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SalesDuo — Entrena tus ventas con IA</title>
 <link rel="icon" type="image/svg+xml" href="/favicon-salesduo-v2.svg">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z1P8M6Y2HE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Z1P8M6Y2HE');
+</script>
+
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window,document,"clarity","script","wc8pd2tonl");
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -1276,17 +1295,15 @@ async function handleSubmit(btn) {
   btn.textContent = 'Abriendo app...';
   btn.disabled = true;
 
-  await Promise.race([
-    trackBottomFormCta({
-      name,
-      email,
-      tipo,
-      sector
-    }),
-    new Promise((resolve) => setTimeout(resolve, 1200))
-  ]);
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('email', email);
+  formData.append('tipo', tipo);
+  formData.append('sector', sector);
 
-  window.location.href = 'https://salesduo-tan.vercel.app';
+  const res = await fetch(MAKE_WEBHOOK_URL, { method: 'POST', body: formData });
+  const { url } = await res.json();
+  window.location.href = url;
 }
 
 // ── SMOOTH ANCHOR SCROLL ───────────────────────────────────────────────────
