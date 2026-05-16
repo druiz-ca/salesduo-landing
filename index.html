@@ -1295,14 +1295,12 @@ async function handleSubmit(btn) {
   btn.textContent = 'Abriendo app...';
   btn.disabled = true;
 
-  const formData = new FormData();
-  formData.append('name', name);
-  formData.append('email', email);
-  formData.append('tipo', tipo);
-  formData.append('sector', sector);
-
   try {
-    const res = await fetch(MAKE_WEBHOOK_URL, { method: 'POST', body: formData });
+    const res = await fetch(MAKE_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, tipo, sector }),
+    });
     const data = await res.json();
     if (data.url) {
       window.location.href = data.url;
