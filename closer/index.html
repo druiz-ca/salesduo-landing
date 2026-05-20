@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SalesDuo Closer — Practica el cierre high-ticket sin quemar leads</title>
+<meta name="description" content="Entrena el cierre de programas de transformación física high-ticket con un cliente IA que objeta como los de verdad. Sin riesgo, sin quemar pipeline real.">
+<link rel="icon" type="image/svg+xml" href="/favicon-salesduo-v2.svg">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z1P8M6Y2HE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Z1P8M6Y2HE');
+</script>
+
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window,document,"clarity","script","wc8pd2tonl");
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060810;
+  --surface: #0c1018;
+  --surface2: #111620;
+  --border: rgba(255,255,255,0.07);
+  --brand: #00d4ff;
+  --brand2: #0091ff;
+  --green: #00e676;
+  --white: #ffffff;
+  --gray: rgba(255,255,255,0.55);
+  --gray2: rgba(255,255,255,0.28);
+  --red: #ff4d6d;
+  --glow: rgba(0,212,255,0.15);
+  --radius: 20px;
+  --font-display: 'DM Serif Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--white);
+  font-family: var(--font-body); font-weight: 300;
+  line-height: 1.6; overflow-x: hidden; cursor: default;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1000; opacity: 0.4;
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5vw; height: 72px;
+  background: rgba(6,8,16,0.7);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s;
+}
+.nav-logo { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: -0.02em; color: var(--white); text-decoration: none; }
+.nav-logo span { color: var(--brand); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { color: var(--gray); font-size: 0.875rem; font-weight: 400; text-decoration: none; letter-spacing: 0.01em; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta { background: var(--brand); color: var(--bg) !important; padding: 0.55rem 1.4rem; border-radius: 50px; font-weight: 600 !important; font-size: 0.85rem !important; transition: all 0.2s !important; }
+.nav-cta:hover { background: white !important; transform: scale(1.03); }
+
+#hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 140px 5vw 80px; position: relative; overflow: hidden; }
+.hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; animation: float 8s ease-in-out infinite; }
+.orb1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,145,255,0.18) 0%, transparent 70%); top: -100px; left: -100px; }
+.orb2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%); bottom: -80px; right: -80px; animation-delay: -4s; }
+.orb3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,230,118,0.08) 0%, transparent 70%); top: 40%; left: 50%; transform: translate(-50%,-50%); animation-delay: -2s; }
+@keyframes float { 0%, 100% { transform: translateY(0px) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
+
+.hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); padding: 0.45rem 1.1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 500; color: var(--brand); letter-spacing: 0.05em; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
+
+.hero-headline { font-family: var(--font-display); font-size: clamp(2.6rem, 6.5vw, 6rem); line-height: 1.05; letter-spacing: -0.03em; max-width: 18ch; margin: 0 auto 1.5rem; opacity: 0; animation: fadeUp 0.9s 0.35s forwards; }
+.hero-headline em { font-style: italic; background: linear-gradient(135deg, var(--brand), var(--brand2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--gray); max-width: 620px; margin: 0 auto 3rem; font-weight: 300; line-height: 1.7; opacity: 0; animation: fadeUp 0.9s 0.5s forwards; }
+.hero-actions { display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s 0.65s forwards; }
+
+.btn-primary { background: var(--brand); color: var(--bg); padding: 1rem 2.4rem; border-radius: 50px; font-size: 0.95rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s; box-shadow: 0 0 40px rgba(0,212,255,0.3); letter-spacing: -0.01em; }
+.btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 60px rgba(0,212,255,0.5); background: white; }
+.btn-secondary { color: var(--gray); padding: 1rem 2rem; border-radius: 50px; font-size: 0.95rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s; background: transparent; cursor: pointer; }
+.btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+
+.hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--gray2); font-size: 0.7rem; letter-spacing: 0.1em; animation: fadeUp 1s 1.2s forwards; opacity: 0; }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--brand), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100% { opacity: 0.3; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(0.7); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+.hero-mockup { width: 100%; max-width: 900px; margin: 5rem auto 0; position: relative; opacity: 0; animation: fadeUp 1s 0.8s forwards; }
+.mockup-glow { position: absolute; inset: -40px; background: radial-gradient(ellipse at 50% 50%, rgba(0,145,255,0.12), transparent 70%); pointer-events: none; }
+.mockup-frame { background: var(--surface2); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; overflow: hidden; box-shadow: 0 50px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset; }
+.mockup-bar { background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--border); padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-r { background: #ff5f57; } .dot-y { background: #ffbd2e; } .dot-g { background: #28c840; }
+.mockup-url { flex: 1; margin: 0 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; padding: 0.35rem 1rem; font-size: 0.75rem; color: var(--gray2); text-align: center; }
+.mockup-inner { padding: 2.5rem; }
+
+.chat-ui { display: flex; flex-direction: column; gap: 1rem; }
+.chat-header-ui { display: flex; align-items: center; justify-content: space-between; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+.chat-persona { display: flex; align-items: center; gap: 0.75rem; }
+.persona-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #0091ff, #00d4ff); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.persona-info h4 { font-size: 0.9rem; font-weight: 500; }
+.persona-info p { font-size: 0.75rem; color: var(--gray2); }
+.score-badge { background: rgba(0,230,118,0.1); border: 1px solid rgba(0,230,118,0.25); color: var(--green); padding: 0.35rem 0.9rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; }
+
+.messages { display: flex; flex-direction: column; gap: 0.75rem; margin: 1rem 0; }
+.msg { max-width: 78%; padding: 0.85rem 1.1rem; border-radius: 16px; font-size: 0.875rem; line-height: 1.5; }
+.msg-client { background: var(--surface); border: 1px solid var(--border); color: var(--gray); align-self: flex-start; border-radius: 4px 16px 16px 16px; }
+.msg-user { background: linear-gradient(135deg, #0050aa, #0091ff); color: white; align-self: flex-end; border-radius: 16px 4px 16px 16px; }
+.msg-feedback { background: rgba(0,230,118,0.06); border: 1px solid rgba(0,230,118,0.15); border-left: 3px solid var(--green); padding: 0.75rem 1rem; border-radius: 0 12px 12px 0; font-size: 0.8rem; color: rgba(0,230,118,0.8); display: flex; gap: 0.5rem; align-items: flex-start; align-self: stretch; }
+.typing-indicator { display: flex; gap: 4px; align-items: center; padding: 0.85rem 1.1rem; }
+.typing-indicator span { width: 7px; height: 7px; background: var(--gray2); border-radius: 50%; animation: typingBounce 1.2s ease-in-out infinite; }
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-8px); } }
+
+.chat-input-ui { display: flex; gap: 0.75rem; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 0.75rem 1rem; }
+.chat-input-ui input { flex: 1; background: transparent; border: none; outline: none; color: var(--gray); font-size: 0.875rem; font-family: var(--font-body); }
+.chat-input-ui input::placeholder { color: var(--gray2); }
+.send-btn { background: var(--brand); color: var(--bg); border: none; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; font-size: 1rem; }
+
+section { padding: 120px 5vw; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-label { display: inline-block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand); margin-bottom: 1.2rem; }
+.section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+.section-title em { font-style: italic; color: var(--brand); }
+.section-sub { font-size: 1.05rem; color: var(--gray); max-width: 600px; line-height: 1.7; font-weight: 300; }
+
+#stats { padding: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+.stats-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat-item { padding: 3rem 2.5rem; border-right: 1px solid var(--border); text-align: center; transition: background 0.3s; }
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: rgba(0,212,255,0.03); }
+.stat-num { font-family: var(--font-display); font-size: 3rem; line-height: 1; margin-bottom: 0.5rem; background: linear-gradient(135deg, var(--white), var(--brand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-label { font-size: 0.85rem; color: var(--gray); font-weight: 300; }
+
+#problem { background: var(--bg); }
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 4rem; }
+.problem-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; position: relative; overflow: hidden; transition: all 0.35s; }
+.problem-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,77,109,0.4), transparent); opacity: 0; transition: opacity 0.35s; }
+.problem-card:hover { border-color: rgba(255,77,109,0.25); transform: translateY(-4px); }
+.problem-card:hover::before { opacity: 1; }
+.problem-icon { font-size: 2.5rem; margin-bottom: 1.5rem; display: block; }
+.problem-card h3 { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.problem-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+.problem-card .cost { margin-top: 1.5rem; padding: 0.75rem 1rem; background: rgba(255,77,109,0.06); border: 1px solid rgba(255,77,109,0.15); border-radius: 10px; font-size: 0.8rem; color: #ff8fa3; font-weight: 500; }
+.problem-full { background: var(--surface2); border: 1px solid rgba(0,212,255,0.15); border-radius: var(--radius); padding: 2.5rem; grid-column: 1 / -1; display: flex; gap: 4rem; align-items: center; }
+.problem-full-text { flex: 1; }
+.problem-stat-big { text-align: center; flex-shrink: 0; }
+.problem-stat-big .big-num { font-family: var(--font-display); font-size: 5rem; line-height: 1; background: linear-gradient(135deg, var(--brand), var(--brand2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.problem-stat-big p { font-size: 0.85rem; color: var(--gray); margin-top: 0.5rem; max-width: 180px; }
+
+#how { background: var(--surface); }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 5rem; }
+.step { position: relative; opacity: 0; transform: translateY(30px); transition: all 0.6s; }
+.step.visible { opacity: 1; transform: translateY(0); }
+.step-num { font-family: var(--font-display); font-size: 5rem; color: rgba(255,255,255,0.04); line-height: 1; position: absolute; top: -1.5rem; left: 0; pointer-events: none; }
+.step-inner { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem 2rem 2rem; height: 100%; transition: all 0.35s; }
+.step-inner:hover { border-color: rgba(0,212,255,0.25); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,212,255,0.1) inset; }
+.step-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, rgba(0,145,255,0.15), rgba(0,212,255,0.08)); border: 1px solid rgba(0,212,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.5rem; }
+.step-inner h3 { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.step-inner p { color: var(--gray); font-size: 0.88rem; line-height: 1.7; }
+
+#objections { background: var(--bg); }
+.obj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem; }
+.obj-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: all 0.35s; opacity: 0; transform: translateY(30px); }
+.obj-card.visible { opacity: 1; transform: translateY(0); }
+.obj-card:hover { border-color: rgba(0,212,255,0.25); transform: translateY(-4px); }
+.obj-quote { font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--white); line-height: 1.4; margin-bottom: 1rem; }
+.obj-quote::before { content: '"'; color: var(--brand); margin-right: 2px; }
+.obj-quote::after { content: '"'; color: var(--brand); margin-left: 2px; }
+.obj-card p { color: var(--gray); font-size: 0.85rem; line-height: 1.7; }
+.obj-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); margin-top: 1rem; padding: 0.3rem 0.7rem; background: rgba(255,77,109,0.08); border: 1px solid rgba(255,77,109,0.2); border-radius: 50px; }
+
+#roi { background: var(--surface); }
+.roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 4rem; }
+.roi-table { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.roi-table-header { display: grid; grid-template-columns: 1fr 1fr 1fr; background: var(--surface); border-bottom: 1px solid var(--border); }
+.roi-th { padding: 1rem 1.2rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray2); }
+.roi-th:last-child { color: var(--green); }
+.roi-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); transition: background 0.2s; }
+.roi-row:last-child { border-bottom: none; }
+.roi-row:hover { background: rgba(255,255,255,0.02); }
+.roi-cell { padding: 1rem 1.2rem; font-size: 0.875rem; }
+.roi-cell:first-child { color: var(--gray); }
+.roi-cell.red { color: #ff8fa3; font-weight: 500; }
+.roi-cell.green { color: var(--green); font-weight: 500; }
+.roi-kpis { display: flex; flex-direction: column; gap: 1.5rem; }
+.roi-kpi { padding: 1.75rem 2rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; transition: all 0.3s; }
+.roi-kpi:hover { border-color: rgba(0,212,255,0.2); }
+.roi-kpi-val { font-family: var(--font-display); font-size: 2.5rem; line-height: 1; background: linear-gradient(135deg, var(--white), var(--brand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.4rem; }
+.roi-kpi-label { font-size: 0.85rem; color: var(--gray); }
+
+#demo { background: var(--bg); text-align: center; padding: 140px 5vw; position: relative; overflow: hidden; }
+.demo-orb { position: absolute; width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(0,145,255,0.08) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+.demo-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.demo-inner .section-title { font-size: clamp(2.2rem, 4.5vw, 4rem); }
+.demo-form { margin-top: 3rem; background: var(--surface2); border: 1px solid rgba(0,212,255,0.15); border-radius: var(--radius); padding: 2.5rem; text-align: left; box-shadow: 0 0 80px rgba(0,145,255,0.08); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+.form-group label { font-size: 0.78rem; font-weight: 500; color: var(--gray); letter-spacing: 0.05em; }
+.form-group input, .form-group select { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; color: var(--white); font-size: 0.9rem; font-family: var(--font-body); font-weight: 300; outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
+.form-group input::placeholder { color: var(--gray2); }
+.form-group input:focus, .form-group select:focus { border-color: rgba(0,212,255,0.4); }
+.form-group select option { background: var(--surface2); }
+.form-submit { width: 100%; padding: 1.1rem; background: var(--brand); color: var(--bg); border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; font-family: var(--font-body); cursor: pointer; transition: all 0.25s; margin-top: 0.5rem; box-shadow: 0 0 30px rgba(0,212,255,0.25); letter-spacing: -0.01em; }
+.form-submit:hover { background: white; box-shadow: 0 0 50px rgba(0,212,255,0.4); transform: translateY(-1px); }
+
+footer { background: var(--surface); border-top: 1px solid var(--border); padding: 3rem 5vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+.footer-logo { font-family: var(--font-display); font-size: 1.2rem; color: var(--white); text-decoration: none; }
+.footer-logo span { color: var(--brand); }
+.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links a { color: var(--gray2); font-size: 0.85rem; text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+.footer-copy { color: var(--gray2); font-size: 0.78rem; }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .problem-grid, .roi-grid, .form-row { grid-template-columns: 1fr; }
+  .steps, .obj-grid { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .problem-full { flex-direction: column; gap: 2rem; }
+}
+.icon { width: 1em; height: 1em; object-fit: contain; vertical-align: middle; filter: drop-shadow(0 0 6px rgba(0,212,255,0.45)); }
+.step-icon img { width: 28px; height: 28px; }
+.problem-icon img { width: 2.5rem; height: 2.5rem; }
+.persona-avatar img { width: 24px; height: 24px; }
+.score-badge img { width: 16px; height: 16px; margin-right: 6px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Sales<span>Duo</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">Cómo funciona</a></li>
+    <li><a href="#objections">Objeciones</a></li>
+    <li><a href="#roi">ROI</a></li>
+    <li><a href="#demo" class="nav-cta">Probar demo</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-orb orb3"></div>
+
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Para closers high-ticket — Acceso gratuito
+  </div>
+
+  <h1 class="hero-headline">
+    Tu próximo cliente ya está agendado.<br><em>¿Lo vas a cerrar?</em>
+  </h1>
+
+  <p class="hero-sub">
+    Practica el cierre de programas high-ticket de transformación física con un cliente IA que objeta como los de verdad — <em>"ya probé otros programas"</em>, <em>"es caro"</em>, <em>"déjame pensarlo"</em>. Sin quemar leads reales de tu pipeline.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#demo" class="btn-primary">
+      Practicar mi próximo cierre
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#how" class="btn-secondary">Ver cómo funciona</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+
+  <!-- APP MOCKUP -->
+  <div class="hero-mockup">
+    <div class="mockup-glow"></div>
+    <div class="mockup-frame">
+      <div class="mockup-bar">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <div class="mockup-url">salesduo.app/closer</div>
+      </div>
+      <div class="mockup-inner">
+        <div class="chat-ui">
+          <div class="chat-header-ui">
+            <div class="chat-persona">
+              <div class="persona-avatar"><img src="/icons/ai.svg" class="icon"></div>
+              <div class="persona-info">
+                <h4>Marta López — Lead cualificado por setter</h4>
+                <p>Programa Optimización Metabólica · 3.000€ · Objeción: escepticismo previo</p>
+              </div>
+            </div>
+            <div class="score-badge"><img src="/icons/trophy.svg" class="icon"> +85 pts</div>
+          </div>
+          <div class="messages">
+            <div class="msg msg-client">
+              "Mira, ya he probado dos programas antes y al final no consigo mantener los hábitos. No sé si esto va a ser diferente."
+            </div>
+            <div class="msg msg-user">
+              "Te entiendo. Cuéntame, ¿qué pasó exactamente en esos programas? ¿En qué punto decidiste dejarlo?"
+            </div>
+            <div class="msg-feedback">
+              ✦ &nbsp;<span>Excelente — <strong>investigaste antes de defender</strong>. Marta se está abriendo en vez de cerrarse. +45 pts</span>
+            </div>
+            <div class="msg msg-client" style="opacity:0.6;">
+              <div class="typing-indicator"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          <div class="chat-input-ui">
+            <input type="text" placeholder="Escribe tu respuesta de cierre..." disabled>
+            <button class="send-btn">↑</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-num">3.000€</div>
+      <div class="stat-label">Comisión perdida en cada cierre fallido</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">68%</div>
+      <div class="stat-label">De los leads cualificados se enfrían en 48h</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Objeciones típicas antes del "sí" en high-ticket</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">€0</div>
+      <div class="stat-label">Coste para empezar — Beta gratuita</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">El problema del closer</span>
+      <h2 class="section-title">Cada lead enfriado<br>son <em>3.000€</em> en tu bolsillo que se van.</h2>
+      <p class="section-sub">El setter te lo deja en bandeja. Tú tienes 30 minutos por Zoom para cerrarlo. Si no manejas las objeciones típicas, el cliente "se lo piensa" y nunca vuelve.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <span class="problem-icon"><img src="/icons/phone.svg" class="icon"></span>
+        <h3>Te quedas en blanco</h3>
+        <p>El cliente suelta "es muy caro" o "déjame consultarlo con mi pareja" y no tienes la respuesta automática. Pierdes el ritmo, el cliente lo nota, y el cierre se cae.</p>
+        <div class="cost">El 80% de los closers freelance pierden el cierre en la primera objeción de precio</div>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:0.1s">
+        <span class="problem-icon"><img src="/icons/shield.svg" class="icon"></span>
+        <h3>Practicas con clientes reales</h3>
+        <p>La única forma de mejorar es haciendo más llamadas. Pero cada llamada de práctica es un lead quemado, una comisión perdida, y un setter mosqueado contigo.</p>
+        <div class="cost">Necesitas ~20 llamadas reales para automatizar una sola objeción nueva</div>
+      </div>
+      <div class="problem-full reveal" style="transition-delay:0.2s">
+        <div class="problem-full-text">
+          <h3 style="font-family:var(--font-display);font-size:1.5rem;letter-spacing:-0.02em;margin-bottom:0.75rem;">El cierre high-ticket no se improvisa — se entrena.</h3>
+          <p style="color:var(--gray);font-size:0.9rem;line-height:1.7;">Cualquier closer top entrena las objeciones antes de la call. Hasta ahora la única opción era role-playing con compañeros (caro, agendas imposibles) o pagar mentorías de 500€/mes. SalesDuo te da role-play infinito con un cliente que objeta como los de verdad.</p>
+        </div>
+        <div class="problem-stat-big">
+          <div class="big-num">×3</div>
+          <p>tasa de cierre de los closers que entrenan objeciones a diario vs. los que no</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div style="text-align:center;" class="reveal">
+      <span class="section-label">Cómo funciona</span>
+      <h2 class="section-title">Entras a Zoom.<br>Cliente IA al otro lado. <em>Igual que la real</em>.</h2>
+      <p class="section-sub" style="margin:0 auto;">Sin escribir, sin guion. Por voz, como tu próxima call. Y al terminar te decimos qué objeción dejaste viva y cómo cerrarla la próxima.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-inner">
+          <div class="step-icon"><img src="/icons/target.svg" class="icon"></div>
+          <h3>Cliente cualificado</h3>
+          <p>El cliente IA llega como si lo hubiera pasado un setter: agendado, con interés, pero con dudas reales. Mismo escenario que tu próxima call del calendario.</p>
+        </div>
+      </div>
+      <div class="step" style="transition-delay:0.15s">
+        <div class="step-num">02</div>
+        <div class="step-inner">
+          <div class="step-icon"><img src="/icons/speech.svg" class="icon"></div>
+          <h3>Llamada por voz</h3>
+          <p>Habláis los dos. Tú haces discovery, manejas objeciones, propones el cierre. El cliente IA tiene memoria, contradicciones y objeciones encadenadas, como las de verdad.</p>
+        </div>
+      </div>
+      <div class="step" style="transition-delay:0.3s">
+        <div class="step-num">03</div>
+        <div class="step-inner">
+          <div class="step-icon"><img src="/icons/chart.svg" class="icon"></div>
+          <h3>Evaluación al terminar</h3>
+          <p>Qué objeción dejaste sin atacar. Qué pregunta no hiciste. Si cerraste o el cliente se fue "a pensarlo". Score, técnicas detectadas y siguiente paso concreto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIONS -->
+<section id="objections">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <span class="section-label">Las 3 objeciones que más cierres te tumban</span>
+      <h2 class="section-title">Las que ya conoces.<br>Las que <em>siguen tumbándote</em>.</h2>
+      <p class="section-sub" style="margin:0 auto;">El cliente IA las va a usar contigo. Vas a tener que cerrarlas — o salir del cierre sin la firma.</p>
+    </div>
+    <div class="obj-grid">
+      <div class="obj-card">
+        <div class="obj-quote">Ya he probado otros programas y no me funcionaron</div>
+        <p>El escepticismo previo. El cliente viene quemado de cursos anteriores que no le sirvieron, y tu programa por defecto entra en el mismo saco. Aprendes a separarte sin contradecirle.</p>
+        <span class="obj-tag">Escepticismo</span>
+      </div>
+      <div class="obj-card" style="transition-delay:0.1s">
+        <div class="obj-quote">Es caro, no sé si lo puedo permitirme ahora mismo</div>
+        <p>La objeción de precio en cierres de 3.000€. Aprendes a llevar la conversación al coste de no actuar — y cuándo es real, cuándo es smokescreen.</p>
+        <span class="obj-tag">Precio</span>
+      </div>
+      <div class="obj-card" style="transition-delay:0.2s">
+        <div class="obj-quote">Déjame pensarlo y te digo algo en unos días</div>
+        <p>La objeción que mata más cierres high-ticket. "Pensarlo" = no. Aprendes a sacar la decisión real en la llamada sin presionar, sin perder al cliente.</p>
+        <span class="obj-tag">Postergación</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section id="roi">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Tu ROI como closer</span>
+      <h2 class="section-title">¿Cuánto te cuesta<br>perder <em>un cierre</em> al mes?</h2>
+      <p class="section-sub">Caso real: closer freelance que cierra programas de transformación física a 3.000€.</p>
+    </div>
+    <div class="roi-grid">
+      <div class="roi-table reveal">
+        <div class="roi-table-header">
+          <div class="roi-th">Escenario</div>
+          <div class="roi-th">Sin entrenar</div>
+          <div class="roi-th">Con SalesDuo</div>
+        </div>
+        <div class="roi-row">
+          <div class="roi-cell">Tasa de cierre</div>
+          <div class="roi-cell red">15–25%</div>
+          <div class="roi-cell green">35–50%</div>
+        </div>
+        <div class="roi-row">
+          <div class="roi-cell">Calls / mes</div>
+          <div class="roi-cell red">40 calls</div>
+          <div class="roi-cell green">40 calls</div>
+        </div>
+        <div class="roi-row">
+          <div class="roi-cell">Cierres / mes</div>
+          <div class="roi-cell red">6–10</div>
+          <div class="roi-cell green">14–20</div>
+        </div>
+        <div class="roi-row">
+          <div class="roi-cell">Comisión / mes</div>
+          <div class="roi-cell red">1.800–3.000€</div>
+          <div class="roi-cell green">4.200–6.000€</div>
+        </div>
+        <div class="roi-row">
+          <div class="roi-cell">Lead enfriado / práctica</div>
+          <div class="roi-cell red">+200€ quemados</div>
+          <div class="roi-cell green">0 — practicas con IA</div>
+        </div>
+      </div>
+      <div class="roi-kpis reveal" style="transition-delay:0.15s">
+        <div class="roi-kpi">
+          <div class="roi-kpi-val">+3.000€</div>
+          <div class="roi-kpi-label">Comisión extra al mes con +2 cierres recuperados</div>
+        </div>
+        <div class="roi-kpi">
+          <div class="roi-kpi-val">15 min</div>
+          <div class="roi-kpi-label">Por sesión de práctica — entre call y call</div>
+        </div>
+        <div class="roi-kpi">
+          <div class="roi-kpi-val">0€</div>
+          <div class="roi-kpi-label">Acceso a la beta — sin tarjeta, sin compromiso</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO FORM -->
+<section id="demo">
+  <div class="demo-orb"></div>
+  <div class="demo-inner">
+    <span class="section-label reveal">Beta gratuita para closers</span>
+    <h2 class="section-title reveal">Practica tu próximo cierre.<br>Sin <em>tarjeta</em>, sin compromiso.</h2>
+    <p class="section-sub reveal" style="margin: 0 auto 0;">5 minutos. Por voz. Igual que tu llamada real.</p>
+
+    <div class="demo-form reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label>NOMBRE</label>
+          <input type="text" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label>EMAIL</label>
+          <input type="email" placeholder="tu@email.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>SOY</label>
+          <select required>
+            <option value="" disabled selected>¿Cómo trabajas?</option>
+            <option>Closer freelance (varios clientes)</option>
+            <option>Closer en agencia / academia</option>
+            <option>Formador / mentor de closers</option>
+            <option>Acabo de empezar como closer</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>NICHO</label>
+          <select required>
+            <option value="" disabled selected>¿Qué cierras normalmente?</option>
+            <option>Transformación física / fitness high-ticket</option>
+            <option>Coaching / mentoring high-ticket</option>
+            <option>Infoproductos / cursos online</option>
+            <option>Servicios consultoría</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+      <button class="form-submit" type="button" onclick="handleSubmit(this)">
+        Practicar mi próximo cierre →
+      </button>
+      <p style="text-align:center;font-size:0.75rem;color:var(--gray2);margin-top:1rem;">
+        Sin tarjeta. Sin spam. La demo arranca al instante en tu navegador.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="/" class="footer-logo">Sales<span>Duo</span></a>
+  <ul class="footer-links">
+    <li><a href="#how">Cómo funciona</a></li>
+    <li><a href="#objections">Objeciones</a></li>
+    <li><a href="#demo">Probar demo</a></li>
+    <li><a href="mailto:salesduoapp@gmail.com">Contacto</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 SalesDuo — España</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal, .step, .obj-card').forEach(el => observer.observe(el));
+
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    nav.style.background = 'rgba(6,8,16,0.92)';
+    nav.style.borderBottomColor = 'rgba(255,255,255,0.1)';
+  } else {
+    nav.style.background = 'rgba(6,8,16,0.7)';
+    nav.style.borderBottomColor = 'rgba(255,255,255,0.07)';
+  }
+});
+
+// MD5 para token desde email (mismo que landing principal)
+function md5(str) {
+  function safeAdd(x, y) { const lsw = (x & 0xFFFF) + (y & 0xFFFF); return (((x >> 16) + (y >> 16) + (lsw >> 16)) << 16) | (lsw & 0xFFFF); }
+  function bitRotateLeft(num, cnt) { return (num << cnt) | (num >>> (32 - cnt)); }
+  function md5cmn(q, a, b, x, s, t) { return safeAdd(bitRotateLeft(safeAdd(safeAdd(a, q), safeAdd(x, t)), s), b); }
+  function md5ff(a,b,c,d,x,s,t){return md5cmn((b&c)|((~b)&d),a,b,x,s,t);}
+  function md5gg(a,b,c,d,x,s,t){return md5cmn((b&d)|(c&(~d)),a,b,x,s,t);}
+  function md5hh(a,b,c,d,x,s,t){return md5cmn(b^c^d,a,b,x,s,t);}
+  function md5ii(a,b,c,d,x,s,t){return md5cmn(c^(b|(~d)),a,b,x,s,t);}
+  function utf8Encode(s) { return unescape(encodeURIComponent(s)); }
+  function str2binl(str) { const bin = []; for (let i = 0; i < str.length * 8; i += 8) bin[i >> 5] |= (str.charCodeAt(i / 8) & 0xFF) << (i % 32); return bin; }
+  function binl2hex(binarray) { const hexchars = '0123456789abcdef'; let str = ''; for (let i = 0; i < binarray.length * 4; i++) { str += hexchars.charAt((binarray[i >> 2] >> ((i % 4) * 8 + 4)) & 0xF) + hexchars.charAt((binarray[i >> 2] >> ((i % 4) * 8)) & 0xF); } return str; }
+  function coreMD5(x, len) {
+    x[len >> 5] |= 0x80 << (len % 32);
+    x[(((len + 64) >>> 9) << 4) + 14] = len;
+    let a=1732584193, b=-271733879, c=-1732584194, d=271733878;
+    for (let i = 0; i < x.length; i += 16) {
+      const olda=a, oldb=b, oldc=c, oldd=d;
+      a=md5ff(a,b,c,d,x[i],7,-680876936); d=md5ff(d,a,b,c,x[i+1],12,-389564586); c=md5ff(c,d,a,b,x[i+2],17,606105819); b=md5ff(b,c,d,a,x[i+3],22,-1044525330);
+      a=md5ff(a,b,c,d,x[i+4],7,-176418897); d=md5ff(d,a,b,c,x[i+5],12,1200080426); c=md5ff(c,d,a,b,x[i+6],17,-1473231341); b=md5ff(b,c,d,a,x[i+7],22,-45705983);
+      a=md5ff(a,b,c,d,x[i+8],7,1770035416); d=md5ff(d,a,b,c,x[i+9],12,-1958414417); c=md5ff(c,d,a,b,x[i+10],17,-42063); b=md5ff(b,c,d,a,x[i+11],22,-1990404162);
+      a=md5ff(a,b,c,d,x[i+12],7,1804603682); d=md5ff(d,a,b,c,x[i+13],12,-40341101); c=md5ff(c,d,a,b,x[i+14],17,-1502002290); b=md5ff(b,c,d,a,x[i+15],22,1236535329);
+      a=md5gg(a,b,c,d,x[i+1],5,-165796510); d=md5gg(d,a,b,c,x[i+6],9,-1069501632); c=md5gg(c,d,a,b,x[i+11],14,643717713); b=md5gg(b,c,d,a,x[i],20,-373897302);
+      a=md5gg(a,b,c,d,x[i+5],5,-701558691); d=md5gg(d,a,b,c,x[i+10],9,38016083); c=md5gg(c,d,a,b,x[i+15],14,-660478335); b=md5gg(b,c,d,a,x[i+4],20,-405537848);
+      a=md5gg(a,b,c,d,x[i+9],5,568446438); d=md5gg(d,a,b,c,x[i+14],9,-1019803690); c=md5gg(c,d,a,b,x[i+3],14,-187363961); b=md5gg(b,c,d,a,x[i+8],20,1163531501);
+      a=md5gg(a,b,c,d,x[i+13],5,-1444681467); d=md5gg(d,a,b,c,x[i+2],9,-51403784); c=md5gg(c,d,a,b,x[i+7],14,1735328473); b=md5gg(b,c,d,a,x[i+12],20,-1926607734);
+      a=md5hh(a,b,c,d,x[i+5],4,-378558); d=md5hh(d,a,b,c,x[i+8],11,-2022574463); c=md5hh(c,d,a,b,x[i+11],16,1839030562); b=md5hh(b,c,d,a,x[i+14],23,-35309556);
+      a=md5hh(a,b,c,d,x[i+1],4,-1530992060); d=md5hh(d,a,b,c,x[i+4],11,1272893353); c=md5hh(c,d,a,b,x[i+7],16,-155497632); b=md5hh(b,c,d,a,x[i+10],23,-1094730640);
+      a=md5hh(a,b,c,d,x[i+13],4,681279174); d=md5hh(d,a,b,c,x[i],11,-358537222); c=md5hh(c,d,a,b,x[i+3],16,-722521979); b=md5hh(b,c,d,a,x[i+6],23,76029189);
+      a=md5hh(a,b,c,d,x[i+9],4,-640364487); d=md5hh(d,a,b,c,x[i+12],11,-421815835); c=md5hh(c,d,a,b,x[i+15],16,530742520); b=md5hh(b,c,d,a,x[i+2],23,-995338651);
+      a=md5ii(a,b,c,d,x[i],6,-198630844); d=md5ii(d,a,b,c,x[i+7],10,1126891415); c=md5ii(c,d,a,b,x[i+14],15,-1416354905); b=md5ii(b,c,d,a,x[i+5],21,-57434055);
+      a=md5ii(a,b,c,d,x[i+12],6,1700485571); d=md5ii(d,a,b,c,x[i+3],10,-1894986606); c=md5ii(c,d,a,b,x[i+10],15,-1051523); b=md5ii(b,c,d,a,x[i+1],21,-2054922799);
+      a=md5ii(a,b,c,d,x[i+8],6,1873313359); d=md5ii(d,a,b,c,x[i+15],10,-30611744); c=md5ii(c,d,a,b,x[i+6],15,-1560198380); b=md5ii(b,c,d,a,x[i+13],21,1309151649);
+      a=md5ii(a,b,c,d,x[i+4],6,-145523070); d=md5ii(d,a,b,c,x[i+11],10,-1120210379); c=md5ii(c,d,a,b,x[i+2],15,718787259); b=md5ii(b,c,d,a,x[i+9],21,-343485551);
+      a=safeAdd(a,olda); b=safeAdd(b,oldb); c=safeAdd(c,oldc); d=safeAdd(d,oldd);
+    }
+    return [a,b,c,d];
+  }
+  const encoded = utf8Encode(str.toLowerCase().trim());
+  return binl2hex(coreMD5(str2binl(encoded), encoded.length * 8));
+}
+
+const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/gm4bcobbujwf5o6iewmoerhuy2l9wh9b';
+const APP_BASE_URL = 'https://salesduo-tan.vercel.app';
+const ICP = 'closer';
+
+async function handleSubmit(btn) {
+  const form = btn.closest('.demo-form');
+  const nameInput = form.querySelector('input[type="text"]');
+  const emailInput = form.querySelector('input[type="email"]');
+  const typeSelect = form.querySelectorAll('select')[0];
+  const nicheSelect = form.querySelectorAll('select')[1];
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const tipo = typeSelect.value;
+  const nicho = nicheSelect.value;
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const blockedDomains = new Set(['example.com', 'test.com', 'mailinator.com', 'tempmail.com']);
+  const commonDomainTypos = new Set(['gmai.com','gmial.com','gmail.con','gmail.coma','gmail,com','hotnail.com','hotmai.com','outlok.com','yaho.com','icloud.con']);
+  const typoTlds = new Set(['cmo', 'coom', 'comm', 'con', 'coma', 'vom', 'xom']);
+  const emailDomain = email.split('@')[1]?.toLowerCase() || '';
+  const domainTld = emailDomain.includes('.') ? emailDomain.split('.').pop() : '';
+
+  nameInput.setCustomValidity(''); emailInput.setCustomValidity('');
+  typeSelect.setCustomValidity(''); nicheSelect.setCustomValidity('');
+
+  if (!name) { nameInput.setCustomValidity('Escribe tu nombre.'); nameInput.reportValidity(); return; }
+  if (!emailPattern.test(email)) { emailInput.setCustomValidity('Escribe un email válido.'); emailInput.reportValidity(); return; }
+  if (commonDomainTypos.has(emailDomain) || emailDomain.includes(',') || emailDomain.includes('..') || typoTlds.has(domainTld)) {
+    emailInput.setCustomValidity('Revisa el dominio del email.'); emailInput.reportValidity(); return;
+  }
+  if (blockedDomains.has(emailDomain)) { emailInput.setCustomValidity('Ese dominio no es válido.'); emailInput.reportValidity(); return; }
+  if (!tipo || !nicho) {
+    if (!tipo) typeSelect.setCustomValidity('Selecciona una opción.');
+    if (!nicho) nicheSelect.setCustomValidity('Selecciona el nicho.');
+    (tipo ? nicheSelect : typeSelect).reportValidity(); return;
+  }
+
+  btn.textContent = 'Abriendo demo...';
+  btn.disabled = true;
+
+  const token = md5(email);
+  const appUrl = `${APP_BASE_URL}/?mvp=1&token=${token}&icp=${ICP}`;
+
+  fetch(MAKE_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name, email, tipo, sector: nicho, nicho,
+      icp: ICP,
+      evento: 'cta_form_submit',
+      nombre: name,
+      origen: 'Landing Closer'
+    }),
+    keepalive: true,
+  }).catch(err => console.error('Error enviando a Make:', err));
+
+  window.location.href = appUrl;
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+window.addEventListener('mousemove', e => {
+  const { clientX, clientY } = e;
+  const { innerWidth, innerHeight } = window;
+  const x = (clientX / innerWidth - 0.5) * 20;
+  const y = (clientY / innerHeight - 0.5) * 20;
+  document.querySelectorAll('.hero-orb').forEach((orb, i) => {
+    const factor = (i + 1) * 0.5;
+    orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+  });
+});
+</script>
+</body>
+</html>
