@@ -685,7 +685,7 @@ async function handleSubmit(btn) {
   btn.disabled = true;
 
   const token = md5(email);
-  const appUrl = `${APP_BASE_URL}/?mvp=1&token=${token}&icp=${ICP}`;
+  const appUrl = `${APP_BASE_URL}/?mvp=1&token=${token}&icp=${ICP}&e=${encodeURIComponent(email)}&n=${encodeURIComponent(name)}`;
 
   fetch(MAKE_WEBHOOK_URL, {
     method: 'POST',
