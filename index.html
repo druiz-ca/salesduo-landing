@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SalesDuo — Entrena tus ventas con IA</title>
+<title>SalesDuo — Forma a tu equipo comercial sin quemar tus leads</title>
+<meta name="description" content="Tus comerciales entrenan objeciones reales con un cliente IA antes de tocar el CRM. Onboarding de 3 meses a 3 semanas. Para PYMES con equipo comercial.">
 <link rel="icon" type="image/svg+xml" href="/favicon-salesduo-v2.svg">
 
 <!-- Google Analytics 4 -->
@@ -47,716 +48,205 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--white); font-family: var(--font-body); font-weight: 300; line-height: 1.6; overflow-x: hidden; cursor: default; }
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.4; }
 
-body {
-  background: var(--bg);
-  color: var(--white);
-  font-family: var(--font-body);
-  font-weight: 300;
-  line-height: 1.6;
-  overflow-x: hidden;
-  cursor: default;
-}
-
-/* ── NOISE OVERLAY ──────────────────────────────────────────── */
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 1000;
-  opacity: 0.4;
-}
-
-/* ── NAV ──────────────────────────────────────────────────── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 5vw;
-  height: 72px;
-  background: rgba(6,8,16,0.7);
-  backdrop-filter: blur(24px) saturate(180%);
-  border-bottom: 1px solid var(--border);
-  transition: all 0.3s;
-}
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  letter-spacing: -0.02em;
-  color: var(--white);
-  text-decoration: none;
-}
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: 72px; background: rgba(6,8,16,0.7); backdrop-filter: blur(24px) saturate(180%); border-bottom: 1px solid var(--border); transition: all 0.3s; }
+.nav-logo { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: -0.02em; color: var(--white); text-decoration: none; }
 .nav-logo span { color: var(--brand); }
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-.nav-links a {
-  color: var(--gray); font-size: 0.875rem; font-weight: 400;
-  text-decoration: none; letter-spacing: 0.01em;
-  transition: color 0.2s;
-}
+.nav-links a { color: var(--gray); font-size: 0.875rem; font-weight: 400; text-decoration: none; letter-spacing: 0.01em; transition: color 0.2s; }
 .nav-links a:hover { color: var(--white); }
-.nav-cta {
-  background: var(--brand); color: var(--bg) !important;
-  padding: 0.55rem 1.4rem; border-radius: 50px;
-  font-weight: 600 !important; font-size: 0.85rem !important;
-  transition: all 0.2s !important;
-}
+.nav-cta { background: var(--brand); color: var(--bg) !important; padding: 0.55rem 1.4rem; border-radius: 50px; font-weight: 600 !important; font-size: 0.85rem !important; transition: all 0.2s !important; }
 .nav-cta:hover { background: white !important; transform: scale(1.03); }
 
-/* ── HERO ──────────────────────────────────────────────────── */
-#hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
-  padding: 140px 5vw 80px;
-  position: relative; overflow: hidden;
-}
+#hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 140px 5vw 80px; position: relative; overflow: hidden; }
+.hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; animation: float 8s ease-in-out infinite; }
+.orb1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,145,255,0.18) 0%, transparent 70%); top: -100px; left: -100px; }
+.orb2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%); bottom: -80px; right: -80px; animation-delay: -4s; }
+.orb3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,230,118,0.08) 0%, transparent 70%); top: 40%; left: 50%; transform: translate(-50%,-50%); animation-delay: -2s; }
+@keyframes float { 0%, 100% { transform: translateY(0px) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
 
-.hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  pointer-events: none;
-  animation: float 8s ease-in-out infinite;
-}
-.orb1 {
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(0,145,255,0.18) 0%, transparent 70%);
-  top: -100px; left: -100px;
-}
-.orb2 {
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%);
-  bottom: -80px; right: -80px;
-  animation-delay: -4s;
-}
-.orb3 {
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(0,230,118,0.08) 0%, transparent 70%);
-  top: 40%; left: 50%; transform: translate(-50%,-50%);
-  animation-delay: -2s;
-}
+.hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); padding: 0.45rem 1.1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 500; color: var(--brand); letter-spacing: 0.05em; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-30px) scale(1.05); }
-}
+.hero-headline { font-family: var(--font-display); font-size: clamp(2.6rem, 6.5vw, 6rem); line-height: 1.05; letter-spacing: -0.03em; max-width: 18ch; margin: 0 auto 1.5rem; opacity: 0; animation: fadeUp 0.9s 0.35s forwards; }
+.hero-headline em { font-style: italic; background: linear-gradient(135deg, var(--brand), var(--brand2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--gray); max-width: 620px; margin: 0 auto 3rem; font-weight: 300; line-height: 1.7; opacity: 0; animation: fadeUp 0.9s 0.5s forwards; }
+.hero-actions { display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s 0.65s forwards; }
 
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(0,212,255,0.08);
-  border: 1px solid rgba(0,212,255,0.2);
-  padding: 0.45rem 1.1rem; border-radius: 50px;
-  font-size: 0.8rem; font-weight: 500;
-  color: var(--brand); letter-spacing: 0.05em;
-  margin-bottom: 2.5rem;
-  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
-}
-.badge-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--brand);
-  animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.5); }
-}
-
-.hero-headline {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 7vw, 6.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  max-width: 14ch;
-  margin: 0 auto 1.5rem;
-  opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
-}
-.hero-headline em {
-  font-style: italic;
-  background: linear-gradient(135deg, var(--brand), var(--brand2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-sub {
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
-  color: var(--gray);
-  max-width: 540px; margin: 0 auto 3rem;
-  font-weight: 300; line-height: 1.7;
-  opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
-}
-
-.hero-actions {
-  display: flex; gap: 1rem; align-items: center; justify-content: center;
-  flex-wrap: wrap;
-  opacity: 0; animation: fadeUp 0.9s 0.65s forwards;
-}
-
-.btn-primary {
-  background: var(--brand);
-  color: var(--bg);
-  padding: 1rem 2.4rem; border-radius: 50px;
-  font-size: 0.95rem; font-weight: 600;
-  text-decoration: none; border: none; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  transition: all 0.25s;
-  box-shadow: 0 0 40px rgba(0,212,255,0.3);
-  letter-spacing: -0.01em;
-}
-.btn-primary:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 0 60px rgba(0,212,255,0.5);
-  background: white;
-}
-.btn-secondary {
-  color: var(--gray);
-  padding: 1rem 2rem; border-radius: 50px;
-  font-size: 0.95rem; font-weight: 400;
-  text-decoration: none; border: 1px solid var(--border);
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  transition: all 0.25s; background: transparent; cursor: pointer;
-}
+.btn-primary { background: var(--brand); color: var(--bg); padding: 1rem 2.4rem; border-radius: 50px; font-size: 0.95rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s; box-shadow: 0 0 40px rgba(0,212,255,0.3); letter-spacing: -0.01em; }
+.btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 60px rgba(0,212,255,0.5); background: white; }
+.btn-secondary { color: var(--gray); padding: 1rem 2rem; border-radius: 50px; font-size: 0.95rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s; background: transparent; cursor: pointer; }
 .btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
 
-.hero-scroll {
-  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-  color: var(--gray2); font-size: 0.7rem; letter-spacing: 0.1em;
-  animation: fadeUp 1s 1.2s forwards; opacity: 0;
-}
-.scroll-line {
-  width: 1px; height: 40px;
-  background: linear-gradient(to bottom, var(--brand), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-@keyframes scrollPulse {
-  0%,100% { opacity: 0.3; transform: scaleY(1); }
-  50% { opacity: 1; transform: scaleY(0.7); }
-}
+.hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--gray2); font-size: 0.7rem; letter-spacing: 0.1em; animation: fadeUp 1s 1.2s forwards; opacity: 0; }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--brand), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100% { opacity: 0.3; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(0.7); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ── APP MOCKUP ───────────────────────────────────────────── */
-.hero-mockup {
-  width: 100%; max-width: 900px; margin: 5rem auto 0;
-  position: relative;
-  opacity: 0; animation: fadeUp 1s 0.8s forwards;
-}
-.mockup-glow {
-  position: absolute; inset: -40px;
-  background: radial-gradient(ellipse at 50% 50%, rgba(0,145,255,0.12), transparent 70%);
-  pointer-events: none;
-}
-.mockup-frame {
-  background: var(--surface2);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 50px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset;
-}
-.mockup-bar {
-  background: rgba(255,255,255,0.04);
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 1.5rem;
-  display: flex; align-items: center; gap: 0.5rem;
-}
+.hero-mockup { width: 100%; max-width: 900px; margin: 5rem auto 0; position: relative; opacity: 0; animation: fadeUp 1s 0.8s forwards; }
+.mockup-glow { position: absolute; inset: -40px; background: radial-gradient(ellipse at 50% 50%, rgba(0,145,255,0.12), transparent 70%); pointer-events: none; }
+.mockup-frame { background: var(--surface2); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; overflow: hidden; box-shadow: 0 50px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset; }
+.mockup-bar { background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--border); padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
 .dot { width: 12px; height: 12px; border-radius: 50%; }
-.dot-r { background: #ff5f57; }
-.dot-y { background: #ffbd2e; }
-.dot-g { background: #28c840; }
-.mockup-url {
-  flex: 1; margin: 0 1rem;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
-  border-radius: 8px; padding: 0.35rem 1rem;
-  font-size: 0.75rem; color: var(--gray2);
-  text-align: center;
-}
+.dot-r { background: #ff5f57; } .dot-y { background: #ffbd2e; } .dot-g { background: #28c840; }
+.mockup-url { flex: 1; margin: 0 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; padding: 0.35rem 1rem; font-size: 0.75rem; color: var(--gray2); text-align: center; }
 .mockup-inner { padding: 2.5rem; }
 
-/* Chat UI inside mockup */
-.chat-ui {
-  display: flex; flex-direction: column; gap: 1rem;
-}
-.chat-header-ui {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-bottom: 1rem; border-bottom: 1px solid var(--border);
-}
-.chat-persona {
-  display: flex; align-items: center; gap: 0.75rem;
-}
-.persona-avatar {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: linear-gradient(135deg, #0091ff, #00d4ff);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem;
-}
+.chat-ui { display: flex; flex-direction: column; gap: 1rem; }
+.chat-header-ui { display: flex; align-items: center; justify-content: space-between; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+.chat-persona { display: flex; align-items: center; gap: 0.75rem; }
+.persona-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #0091ff, #00d4ff); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 .persona-info h4 { font-size: 0.9rem; font-weight: 500; }
 .persona-info p { font-size: 0.75rem; color: var(--gray2); }
-.score-badge {
-  background: rgba(0,230,118,0.1);
-  border: 1px solid rgba(0,230,118,0.25);
-  color: var(--green);
-  padding: 0.35rem 0.9rem; border-radius: 50px;
-  font-size: 0.8rem; font-weight: 600;
-}
+.score-badge { background: rgba(0,230,118,0.1); border: 1px solid rgba(0,230,118,0.25); color: var(--green); padding: 0.35rem 0.9rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; }
 
 .messages { display: flex; flex-direction: column; gap: 0.75rem; margin: 1rem 0; }
-.msg { max-width: 72%; padding: 0.85rem 1.1rem; border-radius: 16px; font-size: 0.875rem; line-height: 1.5; }
+.msg { max-width: 78%; padding: 0.85rem 1.1rem; border-radius: 16px; font-size: 0.875rem; line-height: 1.5; }
 .msg-client { background: var(--surface); border: 1px solid var(--border); color: var(--gray); align-self: flex-start; border-radius: 4px 16px 16px 16px; }
 .msg-user { background: linear-gradient(135deg, #0050aa, #0091ff); color: white; align-self: flex-end; border-radius: 16px 4px 16px 16px; }
-.msg-feedback {
-  background: rgba(0,230,118,0.06);
-  border: 1px solid rgba(0,230,118,0.15);
-  border-left: 3px solid var(--green);
-  padding: 0.75rem 1rem; border-radius: 0 12px 12px 0;
-  font-size: 0.8rem; color: rgba(0,230,118,0.8);
-  display: flex; gap: 0.5rem; align-items: flex-start;
-  align-self: stretch;
-}
-
+.msg-feedback { background: rgba(0,230,118,0.06); border: 1px solid rgba(0,230,118,0.15); border-left: 3px solid var(--green); padding: 0.75rem 1rem; border-radius: 0 12px 12px 0; font-size: 0.8rem; color: rgba(0,230,118,0.8); display: flex; gap: 0.5rem; align-items: flex-start; align-self: stretch; }
 .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 0.85rem 1.1rem; }
-.typing-indicator span {
-  width: 7px; height: 7px; background: var(--gray2); border-radius: 50%;
-  animation: typingBounce 1.2s ease-in-out infinite;
-}
+.typing-indicator span { width: 7px; height: 7px; background: var(--gray2); border-radius: 50%; animation: typingBounce 1.2s ease-in-out infinite; }
 .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
 .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes typingBounce {
-  0%,60%,100% { transform: translateY(0); }
-  30% { transform: translateY(-8px); }
-}
-
-.chat-input-ui {
-  display: flex; gap: 0.75rem; align-items: center;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 14px; padding: 0.75rem 1rem;
-}
-.chat-input-ui input {
-  flex: 1; background: transparent; border: none; outline: none;
-  color: var(--gray); font-size: 0.875rem; font-family: var(--font-body);
-}
+@keyframes typingBounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-8px); } }
+.chat-input-ui { display: flex; gap: 0.75rem; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 0.75rem 1rem; }
+.chat-input-ui input { flex: 1; background: transparent; border: none; outline: none; color: var(--gray); font-size: 0.875rem; font-family: var(--font-body); }
 .chat-input-ui input::placeholder { color: var(--gray2); }
-.send-btn {
-  background: var(--brand); color: var(--bg); border: none;
-  width: 36px; height: 36px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; flex-shrink: 0; font-size: 1rem;
-}
+.send-btn { background: var(--brand); color: var(--bg); border: none; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; font-size: 1rem; }
 
-/* ── SECTION BASE ─────────────────────────────────────────── */
 section { padding: 120px 5vw; }
 .container { max-width: 1100px; margin: 0 auto; }
-
-.section-label {
-  display: inline-block;
-  font-size: 0.75rem; font-weight: 500;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--brand); margin-bottom: 1.2rem;
-}
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  line-height: 1.1; letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
-}
+.section-label { display: inline-block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand); margin-bottom: 1.2rem; }
+.section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
 .section-title em { font-style: italic; color: var(--brand); }
-.section-sub {
-  font-size: 1.05rem; color: var(--gray);
-  max-width: 540px; line-height: 1.7; font-weight: 300;
-}
+.section-sub { font-size: 1.05rem; color: var(--gray); max-width: 600px; line-height: 1.7; font-weight: 300; }
 
-/* ── STATS BAR ────────────────────────────────────────────── */
-#stats {
-  padding: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-  background: var(--surface);
-}
-.stats-inner {
-  max-width: 1100px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(4, 1fr);
-}
-.stat-item {
-  padding: 3rem 2.5rem;
-  border-right: 1px solid var(--border);
-  text-align: center;
-  transition: background 0.3s;
-}
+#stats { padding: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+.stats-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat-item { padding: 3rem 2.5rem; border-right: 1px solid var(--border); text-align: center; transition: background 0.3s; }
 .stat-item:last-child { border-right: none; }
 .stat-item:hover { background: rgba(0,212,255,0.03); }
-.stat-num {
-  font-family: var(--font-display);
-  font-size: 3rem; line-height: 1;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, var(--white), var(--brand));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+.stat-num { font-family: var(--font-display); font-size: 3rem; line-height: 1; margin-bottom: 0.5rem; background: linear-gradient(135deg, var(--white), var(--brand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .stat-label { font-size: 0.85rem; color: var(--gray); font-weight: 300; }
 
-/* ── PROBLEM SECTION ──────────────────────────────────────── */
 #problem { background: var(--bg); }
-.problem-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-  margin-top: 4rem;
-}
-.problem-card {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2.5rem;
-  position: relative; overflow: hidden;
-  transition: all 0.35s;
-}
-.problem-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,77,109,0.4), transparent);
-  opacity: 0; transition: opacity 0.35s;
-}
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 4rem; }
+.problem-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; position: relative; overflow: hidden; transition: all 0.35s; }
+.problem-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,77,109,0.4), transparent); opacity: 0; transition: opacity 0.35s; }
 .problem-card:hover { border-color: rgba(255,77,109,0.25); transform: translateY(-4px); }
 .problem-card:hover::before { opacity: 1; }
-.problem-icon {
-  font-size: 2.5rem; margin-bottom: 1.5rem; display: block;
-}
-.problem-card h3 {
-  font-family: var(--font-display);
-  font-size: 1.4rem; letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
-}
+.problem-icon { font-size: 2.5rem; margin-bottom: 1.5rem; display: block; }
+.problem-card h3 { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
 .problem-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
-.problem-card .cost {
-  margin-top: 1.5rem;
-  padding: 0.75rem 1rem;
-  background: rgba(255,77,109,0.06);
-  border: 1px solid rgba(255,77,109,0.15);
-  border-radius: 10px;
-  font-size: 0.8rem; color: #ff8fa3; font-weight: 500;
-}
-
-.problem-full {
-  background: var(--surface2);
-  border: 1px solid rgba(0,212,255,0.15);
-  border-radius: var(--radius);
-  padding: 2.5rem;
-  grid-column: 1 / -1;
-  display: flex; gap: 4rem; align-items: center;
-}
+.problem-card .cost { margin-top: 1.5rem; padding: 0.75rem 1rem; background: rgba(255,77,109,0.06); border: 1px solid rgba(255,77,109,0.15); border-radius: 10px; font-size: 0.8rem; color: #ff8fa3; font-weight: 500; }
+.problem-full { background: var(--surface2); border: 1px solid rgba(0,212,255,0.15); border-radius: var(--radius); padding: 2.5rem; grid-column: 1 / -1; display: flex; gap: 4rem; align-items: center; }
 .problem-full-text { flex: 1; }
-.problem-stat-big {
-  text-align: center; flex-shrink: 0;
-}
-.problem-stat-big .big-num {
-  font-family: var(--font-display);
-  font-size: 5rem; line-height: 1;
-  background: linear-gradient(135deg, var(--brand), var(--brand2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+.problem-stat-big { text-align: center; flex-shrink: 0; }
+.problem-stat-big .big-num { font-family: var(--font-display); font-size: 5rem; line-height: 1; background: linear-gradient(135deg, var(--brand), var(--brand2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .problem-stat-big p { font-size: 0.85rem; color: var(--gray); margin-top: 0.5rem; max-width: 180px; }
 
-/* ── HOW IT WORKS ─────────────────────────────────────────── */
 #how { background: var(--surface); }
-.steps {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
-  margin-top: 5rem;
-}
-.step {
-  position: relative;
-  opacity: 0; transform: translateY(30px);
-  transition: all 0.6s;
-}
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 5rem; }
+.step { position: relative; opacity: 0; transform: translateY(30px); transition: all 0.6s; }
 .step.visible { opacity: 1; transform: translateY(0); }
-.step-num {
-  font-family: var(--font-display); font-size: 5rem;
-  color: rgba(255,255,255,0.04); line-height: 1;
-  position: absolute; top: -1.5rem; left: 0;
-  pointer-events: none;
-}
-.step-inner {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2.5rem 2rem 2rem;
-  height: 100%;
-  transition: all 0.35s;
-}
-.step-inner:hover {
-  border-color: rgba(0,212,255,0.25);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,212,255,0.1) inset;
-}
-.step-icon {
-  width: 52px; height: 52px; border-radius: 14px;
-  background: linear-gradient(135deg, rgba(0,145,255,0.15), rgba(0,212,255,0.08));
-  border: 1px solid rgba(0,212,255,0.2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem; margin-bottom: 1.5rem;
-}
-.step-inner h3 {
-  font-family: var(--font-display);
-  font-size: 1.2rem; letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
-}
+.step-num { font-family: var(--font-display); font-size: 5rem; color: rgba(255,255,255,0.04); line-height: 1; position: absolute; top: -1.5rem; left: 0; pointer-events: none; }
+.step-inner { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem 2rem 2rem; height: 100%; transition: all 0.35s; }
+.step-inner:hover { border-color: rgba(0,212,255,0.25); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,212,255,0.1) inset; }
+.step-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, rgba(0,145,255,0.15), rgba(0,212,255,0.08)); border: 1px solid rgba(0,212,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.5rem; }
+.step-inner h3 { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
 .step-inner p { color: var(--gray); font-size: 0.88rem; line-height: 1.7; }
 
-.steps-connector {
-  display: flex; align-items: center; justify-content: center;
-  gap: 2rem; margin-top: 3rem;
-}
-.connector-line {
-  flex: 1; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent);
-}
+#moments { background: var(--bg); }
+.moments-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 4rem; }
+.moment-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: all 0.35s; opacity: 0; transform: translateY(30px); }
+.moment-card.visible { opacity: 1; transform: translateY(0); }
+.moment-card:hover { border-color: rgba(0,212,255,0.25); transform: translateY(-4px); }
+.moment-icon { font-size: 1.8rem; width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, rgba(0,145,255,0.15), rgba(0,212,255,0.08)); border: 1px solid rgba(0,212,255,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.moment-text h4 { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.moment-text p { color: var(--gray); font-size: 0.85rem; line-height: 1.6; }
 
-/* ── WHO IS IT FOR ────────────────────────────────────────── */
-#who { background: var(--bg); }
-.who-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 4rem;
-}
-.who-card {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 3rem;
-  position: relative; overflow: hidden;
-  transition: all 0.35s;
-  opacity: 0; transform: translateY(30px);
-}
-.who-card.visible { opacity: 1; transform: translateY(0); }
-.who-card::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--brand), transparent);
-  opacity: 0; transition: opacity 0.35s;
-}
-.who-card:hover { border-color: rgba(0,212,255,0.2); transform: translateY(-6px); }
-.who-card:hover::after { opacity: 1; }
-.who-tag {
-  display: inline-block;
-  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
-  text-transform: uppercase; padding: 0.35rem 0.9rem;
-  border-radius: 50px; margin-bottom: 1.5rem;
-}
-.tag-b2c { background: rgba(0,212,255,0.1); color: var(--brand); border: 1px solid rgba(0,212,255,0.2); }
-.tag-b2b { background: rgba(0,230,118,0.1); color: var(--green); border: 1px solid rgba(0,230,118,0.2); }
-.who-card h3 {
-  font-family: var(--font-display);
-  font-size: 1.6rem; letter-spacing: -0.02em; margin-bottom: 1rem;
-}
-.who-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; }
-.who-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-.who-features li {
-  display: flex; align-items: center; gap: 0.75rem;
-  font-size: 0.875rem; color: rgba(255,255,255,0.75);
-}
-.who-features li::before {
-  content: '✓';
-  width: 20px; height: 20px; border-radius: 50%;
-  background: rgba(0,212,255,0.12);
-  border: 1px solid rgba(0,212,255,0.25);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; color: var(--brand); flex-shrink: 0;
-}
-
-/* ── SECTORS ──────────────────────────────────────────────── */
 #sectors { background: var(--surface); overflow: hidden; }
-.sectors-scroll {
-  display: flex; gap: 1rem; margin-top: 3rem;
-  animation: scrollLeft 20s linear infinite;
-  width: max-content;
-}
+.sectors-scroll { display: flex; gap: 1rem; margin-top: 3rem; animation: scrollLeft 20s linear infinite; width: max-content; }
 .sectors-scroll:hover { animation-play-state: paused; }
-@keyframes scrollLeft {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.sector-pill {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  padding: 0.75rem 1.5rem; border-radius: 50px;
-  white-space: nowrap;
-  display: flex; align-items: center; gap: 0.6rem;
-  font-size: 0.875rem; font-weight: 400;
-  transition: all 0.25s; cursor: default;
-}
+@keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.sector-pill { background: var(--surface2); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: 50px; white-space: nowrap; display: flex; align-items: center; gap: 0.6rem; font-size: 0.875rem; font-weight: 400; transition: all 0.25s; cursor: default; }
 .sector-pill:hover { border-color: rgba(0,212,255,0.3); color: var(--brand); }
-.sector-pill .emoji { font-size: 1rem; }
 
-/* ── ROI SECTION ──────────────────────────────────────────── */
 #roi { background: var(--bg); }
-.roi-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-  margin-top: 4rem;
-}
-.roi-table {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius); overflow: hidden;
-}
-.roi-table-header {
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-}
-.roi-th {
-  padding: 1rem 1.2rem; font-size: 0.75rem; font-weight: 600;
-  letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray2);
-}
+.roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 4rem; }
+.roi-table { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.roi-table-header { display: grid; grid-template-columns: 1fr 1fr 1fr; background: var(--surface); border-bottom: 1px solid var(--border); }
+.roi-th { padding: 1rem 1.2rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray2); }
 .roi-th:last-child { color: var(--green); }
-.roi-row {
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  border-bottom: 1px solid var(--border);
-  transition: background 0.2s;
-}
+.roi-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); transition: background 0.2s; }
 .roi-row:last-child { border-bottom: none; }
 .roi-row:hover { background: rgba(255,255,255,0.02); }
-.roi-cell {
-  padding: 1rem 1.2rem; font-size: 0.875rem;
-}
+.roi-cell { padding: 1rem 1.2rem; font-size: 0.875rem; }
 .roi-cell:first-child { color: var(--gray); }
 .roi-cell.red { color: #ff8fa3; font-weight: 500; }
 .roi-cell.green { color: var(--green); font-weight: 500; }
-
 .roi-kpis { display: flex; flex-direction: column; gap: 1.5rem; }
-.roi-kpi {
-  padding: 1.75rem 2rem;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  transition: all 0.3s;
-}
+.roi-kpi { padding: 1.75rem 2rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; transition: all 0.3s; }
 .roi-kpi:hover { border-color: rgba(0,212,255,0.2); }
-.roi-kpi-val {
-  font-family: var(--font-display);
-  font-size: 2.5rem; line-height: 1;
-  background: linear-gradient(135deg, var(--white), var(--brand));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text; margin-bottom: 0.4rem;
-}
+.roi-kpi-val { font-family: var(--font-display); font-size: 2.5rem; line-height: 1; background: linear-gradient(135deg, var(--white), var(--brand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.4rem; }
 .roi-kpi-label { font-size: 0.85rem; color: var(--gray); }
 
-/* ── CTA / DEMO FORM ──────────────────────────────────────── */
-#demo {
-  background: var(--bg);
-  text-align: center;
-  padding: 140px 5vw;
-  position: relative; overflow: hidden;
-}
-.demo-orb {
-  position: absolute;
-  width: 800px; height: 800px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,145,255,0.08) 0%, transparent 70%);
-  top: 50%; left: 50%; transform: translate(-50%,-50%);
-  pointer-events: none;
-}
+#demo { background: var(--bg); text-align: center; padding: 140px 5vw; position: relative; overflow: hidden; }
+.demo-orb { position: absolute; width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(0,145,255,0.08) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
 .demo-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
 .demo-inner .section-title { font-size: clamp(2.2rem, 4.5vw, 4rem); }
-
-.demo-form {
-  margin-top: 3rem;
-  background: var(--surface2);
-  border: 1px solid rgba(0,212,255,0.15);
-  border-radius: var(--radius);
-  padding: 2.5rem;
-  text-align: left;
-  box-shadow: 0 0 80px rgba(0,145,255,0.08);
-}
+.demo-form { margin-top: 3rem; background: var(--surface2); border: 1px solid rgba(0,212,255,0.15); border-radius: var(--radius); padding: 2.5rem; text-align: left; box-shadow: 0 0 80px rgba(0,145,255,0.08); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
 .form-group label { font-size: 0.78rem; font-weight: 500; color: var(--gray); letter-spacing: 0.05em; }
-.form-group input,
-.form-group select {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 0.85rem 1rem;
-  color: var(--white); font-size: 0.9rem;
-  font-family: var(--font-body); font-weight: 300;
-  outline: none; transition: border-color 0.2s;
-  -webkit-appearance: none;
-}
+.form-group input, .form-group select { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; color: var(--white); font-size: 0.9rem; font-family: var(--font-body); font-weight: 300; outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
 .form-group input::placeholder { color: var(--gray2); }
-.form-group input:focus,
-.form-group select:focus { border-color: rgba(0,212,255,0.4); }
+.form-group input:focus, .form-group select:focus { border-color: rgba(0,212,255,0.4); }
 .form-group select option { background: var(--surface2); }
-.form-submit {
-  width: 100%; padding: 1.1rem;
-  background: var(--brand); color: var(--bg);
-  border: none; border-radius: 12px;
-  font-size: 1rem; font-weight: 600;
-  font-family: var(--font-body); cursor: pointer;
-  transition: all 0.25s; margin-top: 0.5rem;
-  box-shadow: 0 0 30px rgba(0,212,255,0.25);
-  letter-spacing: -0.01em;
-}
-.form-submit:hover {
-  background: white;
-  box-shadow: 0 0 50px rgba(0,212,255,0.4);
-  transform: translateY(-1px);
-}
+.form-submit { width: 100%; padding: 1.1rem; background: var(--brand); color: var(--bg); border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; font-family: var(--font-body); cursor: pointer; transition: all 0.25s; margin-top: 0.5rem; box-shadow: 0 0 30px rgba(0,212,255,0.25); letter-spacing: -0.01em; }
+.form-submit:hover { background: white; box-shadow: 0 0 50px rgba(0,212,255,0.4); transform: translateY(-1px); }
 
-/* ── FOOTER ──────────────────────────────────────────────── */
-footer {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  padding: 3rem 5vw;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 1.5rem;
-}
-.footer-logo {
-  font-family: var(--font-display); font-size: 1.2rem;
-  color: var(--white); text-decoration: none;
-}
+footer { background: var(--surface); border-top: 1px solid var(--border); padding: 3rem 5vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+.footer-logo { font-family: var(--font-display); font-size: 1.2rem; color: var(--white); text-decoration: none; }
 .footer-logo span { color: var(--brand); }
 .footer-links { display: flex; gap: 2rem; list-style: none; }
 .footer-links a { color: var(--gray2); font-size: 0.85rem; text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--white); }
 .footer-copy { color: var(--gray2); font-size: 0.78rem; }
 
-/* ── SCROLL REVEAL ───────────────────────────────────────── */
-.reveal {
-  opacity: 0; transform: translateY(30px);
-  transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 768px) {
   .nav-links { display: none; }
-  .problem-grid, .who-grid, .roi-grid, .form-row { grid-template-columns: 1fr; }
+  .problem-grid, .roi-grid, .form-row, .moments-grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .stats-inner { grid-template-columns: repeat(2, 1fr); }
   .stat-item:nth-child(2) { border-right: none; }
   .problem-full { flex-direction: column; gap: 2rem; }
-
 }
-.icon {
-  width: 1em;
-  height: 1em;
-  object-fit: contain;
-  vertical-align: middle;
-  filter: drop-shadow(0 0 6px rgba(0,212,255,0.45));
-}
-
+.icon { width: 1em; height: 1em; object-fit: contain; vertical-align: middle; filter: drop-shadow(0 0 6px rgba(0,212,255,0.45)); }
 .step-icon img { width: 28px; height: 28px; }
 .problem-icon img { width: 2.5rem; height: 2.5rem; }
 .persona-avatar img { width: 24px; height: 24px; }
 .score-badge img { width: 16px; height: 16px; margin-right: 6px; }
+.moment-icon img { width: 22px; height: 22px; }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Sales<span>Duo</span></a>
   <ul class="nav-links">
     <li><a href="#how">Cómo funciona</a></li>
-    <li><a href="#who">Para quién</a></li>
+    <li><a href="#moments">Cuándo usarlo</a></li>
     <li><a href="#roi">ROI</a></li>
-    <li><a href="#demo" class="nav-cta">Pedir Demo</a></li>
+    <li><a href="#demo" class="nav-cta">Probar demo</a></li>
   </ul>
 </nav>
 
@@ -768,25 +258,23 @@ footer {
 
   <div class="hero-badge">
     <span class="badge-dot"></span>
-    Beta abierta — Acceso gratuito limitado
+    Beta abierta — Gratis para los primeros 50 equipos
   </div>
 
   <h1 class="hero-headline">
-    Entrena ventas.<br><em>Cierra más.</em>
+    Forma a tus comerciales<br><em>sin quemar tus leads.</em>
   </h1>
 
   <p class="hero-sub">
-    Como Duolingo, pero para aprender a vender. Practica objeciones reales con IA antes de llamar a tus clientes.
+    Tu equipo entrena objeciones reales con un cliente IA antes de tocar el CRM. Sin guion, sin compañeros, sin gastar leads buenos. Decides quién está listo para llamar y quién necesita más práctica.
   </p>
 
   <div class="hero-actions">
     <a href="#demo" class="btn-primary">
-      Solicitar demo gratuita
+      Probar la demo ahora
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
-    <a href="#how" class="btn-secondary">
-      Ver cómo funciona
-    </a>
+    <a href="#how" class="btn-secondary">Ver cómo funciona</a>
   </div>
 
   <div class="hero-scroll">
@@ -802,19 +290,19 @@ footer {
         <span class="dot dot-r"></span>
         <span class="dot dot-y"></span>
         <span class="dot dot-g"></span>
-        <div class="mockup-url">app.duosales.io</div>
+        <div class="mockup-url">salesduo.app/demo</div>
       </div>
       <div class="mockup-inner">
         <div class="chat-ui">
           <div class="chat-header-ui">
             <div class="chat-persona">
-              <div class="persona-avatar"><img src="icons/ai.svg" class="icon"></div>
+              <div class="persona-avatar"><img src="/icons/ai.svg" class="icon"></div>
               <div class="persona-info">
                 <h4>Carlos Méndez — Director de Operaciones</h4>
                 <p>Empresa logística · 80 personas · Objeción: precio</p>
               </div>
             </div>
-            <div class="score-badge"><img src="icons/trophy.svg" class="icon"> +80 pts</div>
+            <div class="score-badge"><img src="/icons/trophy.svg" class="icon"> +80 pts</div>
           </div>
           <div class="messages">
             <div class="msg msg-client">
@@ -844,15 +332,15 @@ footer {
 <div id="stats">
   <div class="stats-inner">
     <div class="stat-item reveal">
-      <div class="stat-num">#1</div>
-      <div class="stat-label">Categoría en ofertas de empleo (InfoJobs)</div>
+      <div class="stat-num">€800–1.500</div>
+      <div class="stat-label">En bases de datos quemadas por cada comercial nuevo</div>
     </div>
     <div class="stat-item reveal">
-      <div class="stat-num">0</div>
-      <div class="stat-label">Carreras universitarias de ventas en España</div>
+      <div class="stat-num">3 meses</div>
+      <div class="stat-label">De rampa hasta que un comercial nuevo es productivo</div>
     </div>
     <div class="stat-item reveal">
-      <div class="stat-num">3–6x</div>
+      <div class="stat-num">3–6×</div>
       <div class="stat-label">ROI para empresas en el primer mes</div>
     </div>
     <div class="stat-item reveal">
@@ -867,30 +355,30 @@ footer {
   <div class="container">
     <div class="reveal">
       <span class="section-label">El Problema</span>
-      <h2 class="section-title">Las empresas queman su<br><em>mejor activo</em> formando comerciales</h2>
-      <p class="section-sub">Cuando un comercial nuevo aprende a vender, lo hace con clientes reales. Eso cuesta dinero, oportunidades y reputación.</p>
+      <h2 class="section-title">Las empresas queman su<br><em>mejor activo</em> formando comerciales.</h2>
+      <p class="section-sub">Cuando un comercial nuevo aprende a vender, lo hace con clientes reales del CRM. Eso cuesta dinero, oportunidades y reputación de marca.</p>
     </div>
     <div class="problem-grid">
       <div class="problem-card reveal">
-        <span class="problem-icon"><img src="icons/building.svg" class="icon"></span>
-        <h3>El problema de las empresas</h3>
-        <p>Cuando contratas 5 comerciales nuevos, los pones a llamar a contactos de bases de datos compradas mientras aprenden. Esos contactos quedan quemados antes de que estén listos.</p>
-        <div class="cost">€800–1.500 en bases de datos + oportunidades perdidas cada incorporación</div>
+        <span class="problem-icon"><img src="/icons/building.svg" class="icon"></span>
+        <h3>Tu mejor base de datos se quema rodando comerciales nuevos</h3>
+        <p>Cuando incorporas 5 comerciales, los pones a llamar leads reales mientras aprenden. Para cuando dominan las objeciones, ya has quemado los mejores contactos del CRM. Y esos leads no vuelven.</p>
+        <div class="cost">€800–1.500 quemados por cada comercial nuevo</div>
       </div>
       <div class="problem-card reveal" style="transition-delay:0.1s">
-        <span class="problem-icon"><img src="icons/phone.svg" class="icon"></span>
-        <h3>El problema del comercial</h3>
-        <p>Los closers y vendedores freelance necesitan practicar objeciones constantemente. La única opción es hacerlo con compañeros o directamente con clientes reales — los dos son costosos.</p>
-        <div class="cost">El 60% de los clientes dice NO más de 5 veces antes de comprar</div>
+        <span class="problem-icon"><img src="/icons/phone.svg" class="icon"></span>
+        <h3>El manager pasa media jornada supervisando en vez de vender</h3>
+        <p>La única forma de saber si un comercial está listo es escuchando llamadas grabadas y dándole feedback uno a uno. Eso le come al sales manager 40h por cada incorporación.</p>
+        <div class="cost">El 60% del tiempo del manager se va en onboarding manual</div>
       </div>
       <div class="problem-full reveal" style="transition-delay:0.2s">
         <div class="problem-full-text">
-          <h3 style="font-family:var(--font-display);font-size:1.5rem;letter-spacing:-0.02em;margin-bottom:0.75rem;">Vender es el oficio con más demanda y menos formación</h3>
-          <p style="color:var(--gray);font-size:0.9rem;line-height:1.7;">"Comercial / Ventas" lidera las ofertas activas en InfoJobs año tras año. Sin embargo no existe ninguna carrera universitaria de ventas en España. El mito de que "vendedor se nace" ha dejado sin formación estructurada a millones de personas con talento real.</p>
+          <h3 style="font-family:var(--font-display);font-size:1.5rem;letter-spacing:-0.02em;margin-bottom:0.75rem;">Vender es el oficio con más demanda y menos formación estructurada.</h3>
+          <p style="color:var(--gray);font-size:0.9rem;line-height:1.7;">Tus comerciales aprenden en directo con tus clientes — y eso te cuesta dinero, oportunidades y reputación de marca. Lo que necesitan es un entorno controlado donde practicar objeciones reales sin riesgo. Justo lo que SalesDuo les da.</p>
         </div>
         <div class="problem-stat-big">
-          <div class="big-num">3M+</div>
-          <p>personas en paro que rechazan ofertas de ventas por falta de confianza</p>
+          <div class="big-num">~60%</div>
+          <p>del tiempo del sales manager se va en onboarding manual y supervisión</p>
         </div>
       </div>
     </div>
@@ -902,94 +390,74 @@ footer {
   <div class="container">
     <div style="text-align:center;" class="reveal">
       <span class="section-label">Cómo funciona</span>
-      <h2 class="section-title">Aprende la técnica.<br>Luego practica con el <em>cliente</em>.</h2>
-      <p class="section-sub" style="margin:0 auto;">Cada lección tiene dos pasos: teoría de la técnica y simulación real con un cliente IA que pone las objeciones más difíciles.</p>
+      <h2 class="section-title">Configura tu sector.<br>Tu equipo <em>practica a diario</em>. Tú decides quién llama.</h2>
+      <p class="section-sub" style="margin:0 auto;">Sin guiones, sin role-play con compañeros, sin quemar pipeline. El comercial entrena en 5–10 minutos por sesión, tú ves su progreso en el panel de manager.</p>
     </div>
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
         <div class="step-inner">
-          <div class="step-icon"><img src="icons/target.svg" class="icon"></div>
-          <h3>Elige tu sector</h3>
-          <p>Seguros, inmobiliario, infoproductos, Kit Digital, telecomunicaciones, B2B genérico. La IA se adapta al lenguaje y objeciones específicas de tu mercado.</p>
+          <div class="step-icon"><img src="/icons/target.svg" class="icon"></div>
+          <h3>Configura tu sector y producto</h3>
+          <p>La IA simula los clientes y objeciones reales de tu mercado: logística, software, seguros, Kit Digital, lo que sea. Sin guion genérico, lenguaje de tu vertical.</p>
         </div>
       </div>
       <div class="step" style="transition-delay:0.15s">
         <div class="step-num">02</div>
         <div class="step-inner">
-          <div class="step-icon"><img src="icons/book.svg" class="icon"></div>
-          <h3>Aprende la técnica</h3>
-          <p>Diapositivas cortas con la teoría, ejemplos correctos e incorrectos. Desde manejo del precio hasta creación de urgencia. Sólo lo que funciona en la práctica.</p>
+          <div class="step-icon"><img src="/icons/book.svg" class="icon"></div>
+          <h3>Tu equipo practica a diario</h3>
+          <p>Cada comercial entrena desde su móvil. Sesiones cortas (5–10 min), gamificadas, con feedback inmediato por cada respuesta. XP, rachas, badges.</p>
         </div>
       </div>
       <div class="step" style="transition-delay:0.3s">
         <div class="step-num">03</div>
         <div class="step-inner">
-          <div class="step-icon"><img src="icons/ai.svg" class="icon"></div>
-          <h3>Simulación hiper realista</h3>
-          <p>Un cliente simulado con personalidad, dolor oculto y objeciones reales. Feedback inmediato sobre cada respuesta, puntuación y consejos para mejorar.</p>
+          <div class="step-icon"><img src="/icons/chart.svg" class="icon"></div>
+          <h3>Tú decides quién pasa a llamadas reales</h3>
+          <p>Panel de manager con score por comercial, técnicas dominadas y áreas a mejorar. Tú decides cuándo está listo cada uno para tocar el CRM — sin escuchar 40h de llamadas.</p>
         </div>
-      </div>
-    </div>
-
-    <!-- Feature list -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem;" class="reveal">
-      <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
-        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/trophy.svg" class="icon"></div>
-        <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">Gamificado</div>
-        <div style="font-size:0.78rem;color:var(--gray2);">XP, rachas, badges</div>
-      </div>
-      <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
-        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/chart.svg" class="icon"></div>
-        <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">Progreso real</div>
-        <div style="font-size:0.78rem;color:var(--gray2);">Dashboard personal</div>
-      </div>
-      <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
-        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/speech.svg" class="icon"></div>
-        <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">Feedback instantáneo</div>
-        <div style="font-size:0.78rem;color:var(--gray2);">Técnica detectada</div>
-      </div>
-      <div style="text-align:center;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;">
-        <div style="font-size:1.8rem;margin-bottom:0.75rem;"><img src="icons/globe.svg" class="icon"></div>
-        <div style="font-size:0.85rem;font-weight:500;margin-bottom:0.3rem;">100% en español</div>
-        <div style="font-size:0.78rem;color:var(--gray2);">LATAM incluido</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHO -->
-<section id="who">
+<!-- MOMENTS -->
+<section id="moments">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">Para quién es</span>
-      <h2 class="section-title">Un solo producto.<br>Dos <em>puertas</em> de entrada.</h2>
-      <p class="section-sub">Tanto si eres un comercial que quiere mejorar solo, como si diriges un equipo de ventas.</p>
+      <span class="section-label">Cuándo usarlo</span>
+      <h2 class="section-title">No es solo para <em>onboarding</em>.<br>Es para cada momento crítico del equipo.</h2>
+      <p class="section-sub">Cualquier punto donde tus comerciales necesitan estar afilados antes de hablar con un cliente real.</p>
     </div>
-    <div class="who-grid">
-      <div class="who-card">
-        <span class="who-tag tag-b2c">Particular — B2C</span>
-        <h3>Para el comercial individual</h3>
-        <p>Closers freelance, setters, vendedores telefónicos, profesionales que quieren cambiar de trabajo o mejorar sus resultados.</p>
-        <ul class="who-features">
-          <li>Practica a tu ritmo, cuando quieras</li>
-          <li>Elige el sector en el que trabajas</li>
-          <li>Feedback inmediato en cada respuesta</li>
-          <li>Historial de progreso personal</li>
-          <li>Acceso desde móvil o escritorio</li>
-        </ul>
+    <div class="moments-grid">
+      <div class="moment-card">
+        <div class="moment-icon"><img src="/icons/target.svg" class="icon"></div>
+        <div class="moment-text">
+          <h4>Onboarding de comerciales nuevos</h4>
+          <p>De 3 meses a 3 semanas hasta el primer cierre real. El comercial llega a su primera llamada con 50+ sesiones de práctica detrás.</p>
+        </div>
       </div>
-      <div class="who-card" style="transition-delay:0.15s">
-        <span class="who-tag tag-b2b">Empresa — B2B</span>
-        <h3>Para el equipo comercial</h3>
-        <p>Empresas que incorporan comerciales nuevos o quieren que su equipo practique sin quemar bases de datos reales.</p>
-        <ul class="who-features" style="--color: var(--green)">
-          <li>Panel de manager con progreso del equipo</li>
-          <li>Decide quién pasa a llamadas reales</li>
-          <li>Preserva el 100% de tu base de datos</li>
-          <li>Reduce tiempo de onboarding 60%</li>
-          <li>ROI desde el primer mes</li>
-        </ul>
+      <div class="moment-card" style="transition-delay:0.1s">
+        <div class="moment-icon"><img src="/icons/chart.svg" class="icon"></div>
+        <div class="moment-text">
+          <h4>Reciclaje del equipo existente</h4>
+          <p>Practica una técnica nueva (manejo de objeción de precio, descubrimiento, cierre) sin gastar leads del pipeline en pruebas.</p>
+        </div>
+      </div>
+      <div class="moment-card" style="transition-delay:0.2s">
+        <div class="moment-icon"><img src="/icons/trophy.svg" class="icon"></div>
+        <div class="moment-text">
+          <h4>Pre-campaña de un producto nuevo</h4>
+          <p>Antes de lanzar, todo el equipo entrena las objeciones del nuevo pitch. Día 1 del lanzamiento, ya están afilados.</p>
+        </div>
+      </div>
+      <div class="moment-card" style="transition-delay:0.3s">
+        <div class="moment-icon"><img src="/icons/shield.svg" class="icon"></div>
+        <div class="moment-text">
+          <h4>Vuelta de bajas largas</h4>
+          <p>Tu comercial vuelve de paternidad, IT o un sabático. En vez de oxidarse llamando clientes, recupera ritmo en práctica simulada.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -999,29 +467,32 @@ footer {
 <section id="sectors">
   <div class="container">
     <div style="text-align:center;" class="reveal">
-      <span class="section-label">Sectores disponibles</span>
+      <span class="section-label">Sectores soportados</span>
       <h2 class="section-title">Tu sector.<br>Tus <em>objeciones</em>.</h2>
+      <p class="section-sub" style="margin:0 auto;">La IA aprende el lenguaje y las objeciones específicas de tu vertical, no respuestas genéricas de manual.</p>
     </div>
   </div>
   <div class="sectors-scroll" style="margin-top:3rem;">
-    <div class="sector-pill"><img src="icons/house.svg" class="icon"> Inmobiliario</div>
-    <div class="sector-pill"><img src="icons/shield.svg" class="icon"> Seguros</div>
-    <div class="sector-pill"><img src="icons/laptop.svg" class="icon"> Kit Digital / Software</div>
-    <div class="sector-pill"><img src="icons/cap.svg" class="icon"> Infoproductos</div>
-    <div class="sector-pill"><img src="icons/mobile.svg" class="icon"> Telecomunicaciones</div>
-    <div class="sector-pill"><img src="icons/handshake.svg" class="icon"> B2B Genérico</div>
-    <div class="sector-pill"><img src="icons/fitness.svg" class="icon"> Fitness / Salud</div>
-    <div class="sector-pill"><img src="icons/car.svg" class="icon"> Automoción</div>
-    <div class="sector-pill"><img src="icons/money.svg" class="icon"> Finanzas / Inversión</div>
-    <div class="sector-pill"><img src="icons/house.svg" class="icon"> Inmobiliario</div>
-    <div class="sector-pill"><img src="icons/shield.svg" class="icon"> Seguros</div>
-    <div class="sector-pill"><img src="icons/laptop.svg" class="icon"> Kit Digital / Software</div>
-    <div class="sector-pill"><img src="icons/cap.svg" class="icon"> Infoproductos</div>
-    <div class="sector-pill"><img src="icons/mobile.svg" class="icon"> Telecomunicaciones</div>
-    <div class="sector-pill"><img src="icons/handshake.svg" class="icon"> B2B Genérico</div>
-    <div class="sector-pill"><img src="icons/fitness.svg" class="icon"> Fitness / Salud</div>
-    <div class="sector-pill"><img src="icons/car.svg" class="icon"> Automoción</div>
-    <div class="sector-pill"><img src="icons/money.svg" class="icon"> Finanzas / Inversión</div>
+    <div class="sector-pill"><img src="/icons/house.svg" class="icon"> Inmobiliario</div>
+    <div class="sector-pill"><img src="/icons/shield.svg" class="icon"> Seguros</div>
+    <div class="sector-pill"><img src="/icons/laptop.svg" class="icon"> Software / SaaS</div>
+    <div class="sector-pill"><img src="/icons/laptop.svg" class="icon"> Kit Digital</div>
+    <div class="sector-pill"><img src="/icons/handshake.svg" class="icon"> Consultoría B2B</div>
+    <div class="sector-pill"><img src="/icons/mobile.svg" class="icon"> Telecomunicaciones</div>
+    <div class="sector-pill"><img src="/icons/cap.svg" class="icon"> Formación / Infoproductos</div>
+    <div class="sector-pill"><img src="/icons/fitness.svg" class="icon"> Fitness / Salud</div>
+    <div class="sector-pill"><img src="/icons/money.svg" class="icon"> Finanzas / Inversión</div>
+    <div class="sector-pill"><img src="/icons/car.svg" class="icon"> Automoción</div>
+    <div class="sector-pill"><img src="/icons/house.svg" class="icon"> Inmobiliario</div>
+    <div class="sector-pill"><img src="/icons/shield.svg" class="icon"> Seguros</div>
+    <div class="sector-pill"><img src="/icons/laptop.svg" class="icon"> Software / SaaS</div>
+    <div class="sector-pill"><img src="/icons/laptop.svg" class="icon"> Kit Digital</div>
+    <div class="sector-pill"><img src="/icons/handshake.svg" class="icon"> Consultoría B2B</div>
+    <div class="sector-pill"><img src="/icons/mobile.svg" class="icon"> Telecomunicaciones</div>
+    <div class="sector-pill"><img src="/icons/cap.svg" class="icon"> Formación / Infoproductos</div>
+    <div class="sector-pill"><img src="/icons/fitness.svg" class="icon"> Fitness / Salud</div>
+    <div class="sector-pill"><img src="/icons/money.svg" class="icon"> Finanzas / Inversión</div>
+    <div class="sector-pill"><img src="/icons/car.svg" class="icon"> Automoción</div>
   </div>
 </section>
 
@@ -1030,8 +501,8 @@ footer {
   <div class="container">
     <div class="reveal">
       <span class="section-label">ROI Real</span>
-      <h2 class="section-title">¿Cuánto le cuesta<br>a tu empresa <em>no usar</em> esto?</h2>
-      <p class="section-sub">Caso real: empresa que incorpora 5 comerciales nuevos (seguros, Kit Digital, inmobiliario).</p>
+      <h2 class="section-title">¿Cuánto le cuesta<br>a tu PYME <em>no usar</em> esto?</h2>
+      <p class="section-sub">Caso real: empresa que incorpora 5 comerciales nuevos (Kit Digital, seguros, software).</p>
     </div>
     <div class="roi-grid">
       <div class="roi-table reveal">
@@ -1047,17 +518,17 @@ footer {
         </div>
         <div class="roi-row">
           <div class="roi-cell">Coste mensual</div>
-          <div class="roi-cell red">€1.200+ (manager)</div>
-          <div class="roi-cell green">€395/mes</div>
+          <div class="roi-cell red">€1.200+ supervisión manager</div>
+          <div class="roi-cell green">€395/mes equipo</div>
         </div>
         <div class="roi-row">
-          <div class="roi-cell">Tiempo de rodaje</div>
+          <div class="roi-cell">Tiempo de rampa</div>
           <div class="roi-cell red">2–3 meses</div>
           <div class="roi-cell green">3–4 semanas</div>
         </div>
         <div class="roi-row">
-          <div class="roi-cell">Supervisión manager</div>
-          <div class="roi-cell red">40h/comercial nuevo</div>
+          <div class="roi-cell">Supervisión del manager</div>
+          <div class="roi-cell red">40h por comercial nuevo</div>
           <div class="roi-cell green">Reducción del 60%</div>
         </div>
         <div class="roi-row">
@@ -1068,16 +539,16 @@ footer {
       </div>
       <div class="roi-kpis reveal" style="transition-delay:0.15s">
         <div class="roi-kpi">
-          <div class="roi-kpi-val">3–6x</div>
-          <div class="roi-kpi-label">ROI en el primer mes para empresas</div>
+          <div class="roi-kpi-val">3–6×</div>
+          <div class="roi-kpi-label">ROI en el primer mes — un lead bien cerrado paga la suscripción</div>
         </div>
         <div class="roi-kpi">
           <div class="roi-kpi-val">€395</div>
-          <div class="roi-kpi-label">Coste mensual para 5 comerciales (Starter)</div>
+          <div class="roi-kpi-label">Coste mensual para equipo de 5 comerciales (Starter)</div>
         </div>
         <div class="roi-kpi">
           <div class="roi-kpi-val">–60%</div>
-          <div class="roi-kpi-label">Reducción de tiempo de supervisión del manager</div>
+          <div class="roi-kpi-label">Reducción del tiempo del manager en supervisión</div>
         </div>
       </div>
     </div>
@@ -1088,9 +559,9 @@ footer {
 <section id="demo">
   <div class="demo-orb"></div>
   <div class="demo-inner">
-    <span class="section-label reveal">Acceso Beta Gratuito</span>
-    <h2 class="section-title reveal">Pruébalo ahora.<br>Sin <em>tarjeta</em>, sin compromiso.</h2>
-    <p class="section-sub reveal" style="margin: 0 auto 0;">Consigue acceso gratuito a la beta y sé de los primeros en entrenar con IA.</p>
+    <span class="section-label reveal">Beta gratuita para tu equipo</span>
+    <h2 class="section-title reveal">Prueba tú mismo la demo.<br>Sin <em>tarjeta</em>, sin compromiso.</h2>
+    <p class="section-sub reveal" style="margin: 0 auto 0;">5 minutos. Ponte en la piel de tu comercial y mira cómo le evaluamos. Después decides si lo quieres para tu equipo.</p>
 
     <div class="demo-form reveal">
       <div class="form-row">
@@ -1099,76 +570,60 @@ footer {
           <input type="text" placeholder="Tu nombre" required>
         </div>
         <div class="form-group">
-          <label>EMAIL</label>
-          <input type="email" placeholder="tu@email.com" required>
+          <label>EMAIL CORPORATIVO</label>
+          <input type="email" placeholder="tu@empresa.com" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>SOY</label>
+          <label>TU ROL</label>
           <select required>
-            <option value="" disabled selected>¿Eres particular o empresa?</option>
-            <option>Comercial / Closer / Setter individual</option>
-            <option>Responsable de equipo comercial</option>
-            <option>Empresa (3+ comerciales)</option>
-            <option>Estudiante / En búsqueda de empleo en ventas</option>
+            <option value="" disabled selected>¿Qué responsabilidad tienes?</option>
+            <option>Fundador / CEO</option>
+            <option>Director Comercial / Head of Sales</option>
+            <option>Sales Manager / Team Lead</option>
+            <option>RRHH / Talento</option>
             <option>Otro</option>
           </select>
         </div>
         <div class="form-group">
-          <label>SECTOR</label>
+          <label>TAMAÑO DEL EQUIPO COMERCIAL</label>
           <select required>
-            <option value="" disabled selected>¿En qué sector vendes?</option>
-            <option>Seguros</option>
-            <option>Inmobiliario</option>
-            <option>Software / Kit Digital</option>
-            <option>Infoproductos / Formación</option>
-            <option>Telecomunicaciones</option>
-            <option>B2B Genérico</option>
-            <option>Otro</option>
+            <option value="" disabled selected>¿Cuántos comerciales tenéis?</option>
+            <option>1–3 comerciales</option>
+            <option>4–10 comerciales</option>
+            <option>11–30 comerciales</option>
+            <option>30+ comerciales</option>
+            <option>Aún ninguno (en proceso de contratar)</option>
           </select>
         </div>
       </div>
-<!--       <button class="form-submit" onclick="handleSubmit(this)">
-        Quiero acceso gratuito a la Beta →
-      </button> -->
-      <button
-        class="form-submit"
-        type="button"
-        onclick="handleSubmit(this)">
-        Quiero acceso gratuito a la Beta →
+      <button class="form-submit" type="button" onclick="handleSubmit(this)">
+        Probar la demo ahora →
       </button>
       <p style="text-align:center;font-size:0.75rem;color:var(--gray2);margin-top:1rem;">
-        Sin spam. Sin tarjeta. Solo te avisamos cuando tu acceso esté listo.
+        Sin tarjeta. Sin spam. La demo arranca al instante en tu navegador.
       </p>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <a href="#" class="footer-logo">Sales<span>Duo</span></a>
   <ul class="footer-links">
     <li><a href="#how">Cómo funciona</a></li>
-    <li><a href="#who">Para quién</a></li>
+    <li><a href="#moments">Cuándo usarlo</a></li>
     <li><a href="#demo">Demo gratuita</a></li>
     <li><a href="mailto:salesduoapp@gmail.com">Contacto</a></li>
   </ul>
-  <p class="footer-copy">© 2026 SalesDuo - España</p>
+  <p class="footer-copy">© 2026 SalesDuo — España</p>
 </footer>
 
 <script>
-// ── SCROLL REVEAL ──────────────────────────────────────────────────────────
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.reveal, .step, .who-card').forEach(el => observer.observe(el));
-// ── NAV SCROLL EFFECT ──────────────────────────────────────────────────────
+document.querySelectorAll('.reveal, .step, .moment-card').forEach(el => observer.observe(el));
 
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {
@@ -1181,34 +636,17 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// ── MD5 (para generar token desde email sin esperar a Make) ────────────────
 function md5(str) {
-  function safeAdd(x, y) {
-    const lsw = (x & 0xFFFF) + (y & 0xFFFF);
-    return (((x >> 16) + (y >> 16) + (lsw >> 16)) << 16) | (lsw & 0xFFFF);
-  }
+  function safeAdd(x, y) { const lsw = (x & 0xFFFF) + (y & 0xFFFF); return (((x >> 16) + (y >> 16) + (lsw >> 16)) << 16) | (lsw & 0xFFFF); }
   function bitRotateLeft(num, cnt) { return (num << cnt) | (num >>> (32 - cnt)); }
   function md5cmn(q, a, b, x, s, t) { return safeAdd(bitRotateLeft(safeAdd(safeAdd(a, q), safeAdd(x, t)), s), b); }
   function md5ff(a,b,c,d,x,s,t){return md5cmn((b&c)|((~b)&d),a,b,x,s,t);}
   function md5gg(a,b,c,d,x,s,t){return md5cmn((b&d)|(c&(~d)),a,b,x,s,t);}
   function md5hh(a,b,c,d,x,s,t){return md5cmn(b^c^d,a,b,x,s,t);}
   function md5ii(a,b,c,d,x,s,t){return md5cmn(c^(b|(~d)),a,b,x,s,t);}
-  function utf8Encode(s) {
-    return unescape(encodeURIComponent(s));
-  }
-  function str2binl(str) {
-    const bin = [];
-    for (let i = 0; i < str.length * 8; i += 8) bin[i >> 5] |= (str.charCodeAt(i / 8) & 0xFF) << (i % 32);
-    return bin;
-  }
-  function binl2hex(binarray) {
-    const hexchars = '0123456789abcdef';
-    let str = '';
-    for (let i = 0; i < binarray.length * 4; i++) {
-      str += hexchars.charAt((binarray[i >> 2] >> ((i % 4) * 8 + 4)) & 0xF) + hexchars.charAt((binarray[i >> 2] >> ((i % 4) * 8)) & 0xF);
-    }
-    return str;
-  }
+  function utf8Encode(s) { return unescape(encodeURIComponent(s)); }
+  function str2binl(str) { const bin = []; for (let i = 0; i < str.length * 8; i += 8) bin[i >> 5] |= (str.charCodeAt(i / 8) & 0xFF) << (i % 32); return bin; }
+  function binl2hex(binarray) { const hexchars = '0123456789abcdef'; let str = ''; for (let i = 0; i < binarray.length * 4; i++) { str += hexchars.charAt((binarray[i >> 2] >> ((i % 4) * 8 + 4)) & 0xF) + hexchars.charAt((binarray[i >> 2] >> ((i % 4) * 8)) & 0xF); } return str; }
   function coreMD5(x, len) {
     x[len >> 5] |= 0x80 << (len % 32);
     x[(((len + 64) >>> 9) << 4) + 14] = len;
@@ -1239,149 +677,72 @@ function md5(str) {
   return binl2hex(coreMD5(str2binl(encoded), encoded.length * 8));
 }
 
-// ── FORM SUBMIT ────────────────────────────────────────────────────────────
 const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/gm4bcobbujwf5o6iewmoerhuy2l9wh9b';
 const APP_BASE_URL = 'https://salesduo-tan.vercel.app';
-
-async function sendLeadToMake(payload) {
-  try {
-    await fetch(MAKE_WEBHOOK_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-      keepalive: true,
-    });
-  } catch (error) {
-    console.error('Error enviando a Make:', error);
-  }
-}
-
-function trackTopCtas(ctaText) {
-  return sendLeadToMake({
-    evento: 'cta_top_click',
-    cta_grupo: 'top_buttons',
-    cta_texto: ctaText,
-    fecha: new Date().toISOString(),
-    origen: 'Landing Vercel'
-  });
-}
-
-function trackBottomFormCta({ name, email, tipo, sector }) {
-  return sendLeadToMake({
-    evento: 'cta_form_submit',
-    cta_grupo: 'bottom_form_button',
-    nombre: name,
-    email,
-    tipo,
-    sector,
-    fecha: new Date().toISOString(),
-    origen: 'Landing Vercel'
-  });
-}
+const ICP = 'b2b';
 
 async function handleSubmit(btn) {
   const form = btn.closest('.demo-form');
   const nameInput = form.querySelector('input[type="text"]');
   const emailInput = form.querySelector('input[type="email"]');
-  const typeSelect = form.querySelectorAll('select')[0];
-  const sectorSelect = form.querySelectorAll('select')[1];
-  const name = form.querySelector('input[type="text"]').value.trim();
-  const email = form.querySelector('input[type="email"]').value.trim();
-  const tipo = form.querySelectorAll('select')[0].value;
-  const sector = form.querySelectorAll('select')[1].value;
+  const roleSelect = form.querySelectorAll('select')[0];
+  const sizeSelect = form.querySelectorAll('select')[1];
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const tipo = roleSelect.value;
+  const tamano = sizeSelect.value;
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const blockedDomains = new Set(['example.com', 'test.com', 'mailinator.com', 'tempmail.com']);
-  const commonDomainTypos = new Set([
-    'gmai.com',
-    'gmial.com',
-    'gmail.con',
-    'gmail.coma',
-    'gmail,com',
-    'hotnail.com',
-    'hotmai.com',
-    'outlok.com',
-    'yaho.com',
-    'icloud.con'
-  ]);
+  const commonDomainTypos = new Set(['gmai.com','gmial.com','gmail.con','gmail.coma','gmail,com','hotnail.com','hotmai.com','outlok.com','yaho.com','icloud.con']);
   const typoTlds = new Set(['cmo', 'coom', 'comm', 'con', 'coma', 'vom', 'xom']);
   const emailDomain = email.split('@')[1]?.toLowerCase() || '';
   const domainTld = emailDomain.includes('.') ? emailDomain.split('.').pop() : '';
 
-  nameInput.setCustomValidity('');
-  emailInput.setCustomValidity('');
-  typeSelect.setCustomValidity('');
-  sectorSelect.setCustomValidity('');
+  nameInput.setCustomValidity(''); emailInput.setCustomValidity('');
+  roleSelect.setCustomValidity(''); sizeSelect.setCustomValidity('');
 
-  if (!name) {
-    nameInput.setCustomValidity('Escribe tu nombre.');
-    nameInput.reportValidity();
-    return;
+  if (!name) { nameInput.setCustomValidity('Escribe tu nombre.'); nameInput.reportValidity(); return; }
+  if (!emailPattern.test(email)) { emailInput.setCustomValidity('Escribe un email válido.'); emailInput.reportValidity(); return; }
+  if (commonDomainTypos.has(emailDomain) || emailDomain.includes(',') || emailDomain.includes('..') || typoTlds.has(domainTld)) {
+    emailInput.setCustomValidity('Revisa el dominio del email.'); emailInput.reportValidity(); return;
+  }
+  if (blockedDomains.has(emailDomain)) { emailInput.setCustomValidity('Ese dominio no es válido.'); emailInput.reportValidity(); return; }
+  if (!tipo || !tamano) {
+    if (!tipo) roleSelect.setCustomValidity('Selecciona tu rol.');
+    if (!tamano) sizeSelect.setCustomValidity('Selecciona el tamaño del equipo.');
+    (tipo ? sizeSelect : roleSelect).reportValidity(); return;
   }
 
-  if (!emailPattern.test(email)) {
-    emailInput.setCustomValidity('Escribe un email válido. Ejemplo: nombre@dominio.com');
-    emailInput.reportValidity();
-    return;
-  }
-
-  if (
-    commonDomainTypos.has(emailDomain)
-    || emailDomain.includes(',')
-    || emailDomain.includes('..')
-    || typoTlds.has(domainTld)
-  ) {
-    emailInput.setCustomValidity('Revisa el dominio del email (por ejemplo: gmail.com). Parece que tiene un error tipográfico.');
-    emailInput.reportValidity();
-    return;
-  }
-
-  if (blockedDomains.has(emailDomain)) {
-    emailInput.setCustomValidity('Ese dominio no es válido para registrarse.');
-    emailInput.reportValidity();
-    return;
-  }
-
-  if (!tipo || !sector) {
-    if (!tipo) typeSelect.setCustomValidity('Selecciona una opción.');
-    if (!sector) sectorSelect.setCustomValidity('Selecciona un sector.');
-    (tipo ? sectorSelect : typeSelect).reportValidity();
-    return;
-  }
-
-  btn.textContent = 'Abriendo app...';
+  btn.textContent = 'Abriendo demo...';
   btn.disabled = true;
 
-  // Calcular token localmente (md5 del email) → redirigir SIN esperar a Make
   const token = md5(email);
-  const appUrl = `${APP_BASE_URL}/?mvp=1&token=${token}`;
+  const appUrl = `${APP_BASE_URL}/?mvp=1&token=${token}&icp=${ICP}`;
 
-  // Enviar datos a Make en background (sin bloquear)
   fetch(MAKE_WEBHOOK_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, tipo, sector, evento: 'cta_form_submit', nombre: name }),
+    body: JSON.stringify({
+      name, email, tipo, tamano,
+      icp: ICP,
+      evento: 'cta_form_submit',
+      nombre: name,
+      origen: 'Landing B2B'
+    }),
     keepalive: true,
   }).catch(err => console.error('Error enviando a Make:', err));
 
-  // Redirigir inmediatamente
   window.location.href = appUrl;
 }
 
-// ── SMOOTH ANCHOR SCROLL ───────────────────────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
 
-// ── PARALLAX ORBS ─────────────────────────────────────────────────────────
 window.addEventListener('mousemove', e => {
   const { clientX, clientY } = e;
   const { innerWidth, innerHeight } = window;
@@ -1392,21 +753,6 @@ window.addEventListener('mousemove', e => {
     orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
   });
 });
-
-const navTopCta = document.querySelector('.nav-cta');
-const heroTopCta = document.querySelector('.hero-actions .btn-primary');
-
-if (navTopCta) {
-  navTopCta.addEventListener('click', () => {
-    trackTopCtas(navTopCta.textContent.trim());
-  });
-}
-
-if (heroTopCta) {
-  heroTopCta.addEventListener('click', () => {
-    trackTopCtas(heroTopCta.textContent.trim());
-  });
-}
 </script>
 </body>
 </html>
