@@ -683,7 +683,11 @@ async function handleSubmit(btn) {
   btn.disabled = true;
 
   const token = md5(email);
-  const appUrl = `${APP_BASE_URL}/?mvp=1&token=${token}&icp=${ICP}`;
+  // Pasamos email/name en base64 url-safe. La app los usa de fallback si Make
+  // todavía no ha insertado el row en demo_tokens — así nunca redirige al user
+  // de vuelta a la landing por una race condition.
+  const b64u = (s) => btoa(unescape(encodeURIComponent(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  const appUrl = `${APP_BASE_URL}/?mvp=1&token=${token}&icp=${ICP}&e=${b64u(email)}&n=${b64u(name)}`;
 
   fetch(MAKE_WEBHOOK_URL, {
     method: 'POST',
