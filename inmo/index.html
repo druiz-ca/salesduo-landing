@@ -646,6 +646,11 @@ function md5(str) {
 
 const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/gm4bcobbujwf5o6iewmoerhuy2l9wh9b';
 const APP_BASE_URL = 'https://salesduo-tan.vercel.app';
+// Supabase como source of truth — independiente de Make. Si Make/Gmail/Slack
+// se caen, el lead sigue guardado aquí. La anon key es publishable, segura
+// (RLS valida que token = md5(email) para bloquear spam).
+const SUPABASE_URL = 'https://ekchfmncwmrtdahqdhhw.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_7evH8OYknL0fZ-DOp_1TyA_nCRqD-9_';
 const ICP = 'inmo';
 
 async function handleSubmit(btn) {
@@ -691,6 +696,27 @@ async function handleSubmit(btn) {
   const b64u = (s) => btoa(unescape(encodeURIComponent(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   const appUrl = `${APP_BASE_URL}/?mvp=1&token=${token}&icp=${ICP}&e=${b64u(email)}&n=${b64u(name)}`;
 
+  // 1) PRIMERO: escribir el lead en Supabase (source of truth). Esperamos a
+  // que termine para garantizar que el lead queda guardado antes del redirect.
+  // Si Supabase falla, seguimos igual: la app tiene fallback de URL.
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/demo_tokens`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=ignore-duplicates',
+      },
+      body: JSON.stringify({ token, email, name }),
+      keepalive: true,
+    });
+  } catch (err) {
+    console.error('Error guardando en Supabase:', err);
+  }
+
+  // 2) DESPUÉS: notificar a Make (fire-and-forget) para Airtable + Slack + email.
+  // Si Make cae, no pasa nada — el lead ya está en Supabase.
   fetch(MAKE_WEBHOOK_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
