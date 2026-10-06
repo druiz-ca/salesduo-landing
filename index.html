@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SalesDuo — Prueba una llamada de venta con un cliente que objeta</title>
-<meta name="description" content="Cinco minutos al teléfono con un cliente que te pone objeciones reales. Al colgar te digo qué has hecho bien y qué no. Una prueba en construcción, no una venta.">
+<title>SalesDuo — Entrena a tus comerciales nuevos con llamadas simuladas</title>
+<meta name="description" content="Tus comerciales nuevos practican con un cliente con IA que les pone objeciones reales por teléfono. Al colgar, reciben qué han hecho bien y qué cambiar. Pruébalo en 5 minutos.">
 <link rel="icon" type="image/svg+xml" href="/favicon-salesduo-v2.svg">
 
 <!-- Google Analytics 4 -->
@@ -72,7 +72,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); animation: pulse 2s ease-in-out infinite; }
 @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
 
-.hero-headline { font-family: var(--font-display); font-size: clamp(2.6rem, 6.5vw, 6rem); line-height: 1.05; letter-spacing: -0.03em; max-width: 18ch; margin: 0 auto 1.5rem; opacity: 0; animation: fadeUp 0.9s 0.35s forwards; }
+.hero-headline { font-family: var(--font-display); font-size: clamp(2.6rem, 6.5vw, 6rem); line-height: 1.05; letter-spacing: -0.03em; max-width: 24ch; margin: 0 auto 1.5rem; opacity: 0; animation: fadeUp 0.9s 0.35s forwards; }
 .hero-headline em { font-style: italic; background: linear-gradient(135deg, var(--brand), var(--brand2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .hero-sub { font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--gray); max-width: 620px; margin: 0 auto 3rem; font-weight: 300; line-height: 1.7; opacity: 0; animation: fadeUp 0.9s 0.5s forwards; }
 .hero-actions { display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s 0.65s forwards; }
@@ -223,7 +223,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 768px) {
-  .nav-links { display: none; }
+  .nav-links a:not(.nav-cta) { display: none; }
   .problem-grid, .roi-grid, .form-row, .moments-grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .stats-inner { grid-template-columns: repeat(2, 1fr); }
@@ -236,6 +236,69 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 .persona-avatar img { width: 24px; height: 24px; }
 .score-badge img { width: 16px; height: 16px; margin-right: 6px; }
 .moment-icon img { width: 22px; height: 22px; }
+
+/* Llamada de voz (mockup) */
+.call-ui { display: grid; grid-template-columns: 1fr 1.25fr; gap: 1.5rem; text-align: left; }
+.call-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.9rem; }
+.call-status { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 500; color: var(--green); background: rgba(0,230,118,0.08); border: 1px solid rgba(0,230,118,0.2); padding: 0.3rem 0.8rem; border-radius: 50px; }
+.call-status .live { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: livePulse 1.4s ease-in-out infinite; }
+@keyframes livePulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.call-avatar-wrap { position: relative; width: 110px; height: 110px; margin: 0.6rem 0 0.2rem; }
+.call-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(0,212,255,0.5); animation: ring 2s ease-out infinite; }
+.call-ring.r2 { animation-delay: 0.7s; } .call-ring.r3 { animation-delay: 1.4s; }
+@keyframes ring { from { transform: scale(1); opacity: 0.8; } to { transform: scale(1.6); opacity: 0; } }
+.call-avatar { position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(135deg, #0091ff, #00d4ff); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 2.2rem; color: var(--bg); }
+.call-name { font-size: 1rem; font-weight: 500; }
+.call-role { font-size: 0.75rem; color: var(--gray2); margin-top: -0.6rem; }
+.wave { display: flex; align-items: center; gap: 4px; height: 36px; }
+.wave span { width: 4px; border-radius: 4px; background: var(--brand); animation: wave 1s ease-in-out infinite; }
+.wave span:nth-child(odd) { animation-duration: 0.8s; }
+.wave span:nth-child(3n) { animation-duration: 1.2s; }
+.wave span:nth-child(4n) { animation-delay: -0.4s; }
+.wave span:nth-child(5n) { animation-delay: -0.2s; }
+@keyframes wave { 0%,100% { height: 6px; } 50% { height: 32px; } }
+.call-speaking { font-size: 0.75rem; color: var(--brand); }
+.call-controls { display: flex; gap: 1rem; margin-top: 0.4rem; }
+.call-btn { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--white); }
+.call-btn.hang { background: var(--red); border-color: var(--red); }
+.call-btn.hang svg { transform: rotate(135deg); }
+.transcript { display: flex; flex-direction: column; gap: 0.8rem; }
+.transcript-title { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray2); display: flex; align-items: center; gap: 0.5rem; }
+.line { display: flex; flex-direction: column; gap: 0.25rem; }
+.line-who { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; display: flex; align-items: center; gap: 0.35rem; }
+.line-who.client { color: var(--brand); } .line-who.you { color: #7fb8ff; }
+.line-text { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 0.95rem; font-size: 0.85rem; line-height: 1.5; color: var(--gray); }
+.line.you .line-text { background: rgba(0,145,255,0.12); border-color: rgba(0,145,255,0.25); color: var(--white); }
+
+/* Problema */
+.problem-lines { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.3rem); line-height: 1.3; letter-spacing: -0.02em; max-width: 760px; }
+.problem-lines p { margin-bottom: 1.4rem; }
+.problem-lines .muted { color: var(--gray); }
+.problem-lines em { color: var(--brand); }
+.step-inner .step-n { font-family: var(--font-display); font-size: 1.1rem; color: var(--brand); margin-bottom: 0.6rem; display: block; }
+.hero-micro { font-size: 0.8rem; color: var(--gray2); margin-top: 1rem; opacity: 0; animation: fadeUp 0.9s 0.65s forwards; }
+.pd { text-align: center; font-size: 0.85rem; color: var(--gray); margin-top: 1.5rem; font-style: italic; }
+
+@media (max-width: 768px) {
+  .call-ui { grid-template-columns: 1fr; }
+  .mockup-inner { padding: 1.25rem; }
+}
+
+/* Reconocimientos */
+#respaldo { padding: 56px 5vw 64px; border-top: 1px solid var(--border); background: var(--surface); text-align: center; }
+.respaldo-label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray2); margin-bottom: 2rem; display: block; }
+.respaldo-row { display: flex; flex-direction: column; align-items: center; gap: 2.25rem; max-width: 1000px; margin: 0 auto; }
+.award { display: flex; align-items: center; gap: 0.9rem; padding: 0.9rem 1.4rem 0.9rem 1rem; border: 1px solid rgba(255,200,87,0.3); border-radius: 16px; background: linear-gradient(135deg, rgba(255,200,87,0.08), rgba(255,200,87,0.02)); text-align: left; }
+.award svg { flex-shrink: 0; }
+.award-kicker { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: #ffc857; font-weight: 600; }
+.award-title { font-family: var(--font-display); font-size: 1.15rem; line-height: 1.15; color: var(--white); }
+.award-sub { font-size: 0.75rem; color: var(--gray); }
+.logo-slot { height: 48px; display: flex; align-items: center; justify-content: center; opacity: 0.65; transition: opacity 0.2s; }
+.logo-slot:hover { opacity: 1; }
+.logo-slot img { max-height: 40px; max-width: 140px; width: auto; height: auto; filter: brightness(0) invert(1); }
+.logo-slot.tall img { max-height: 48px; }
+.respaldo-logos { display: flex; align-items: center; justify-content: center; gap: 2.75rem; flex-wrap: wrap; }
+@media (max-width: 768px) { .respaldo-row { gap: 1.75rem; } }
 </style>
 </head>
 <body>
@@ -243,7 +306,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 <nav>
   <a href="#" class="nav-logo">Sales<span>Duo</span></a>
   <ul class="nav-links">
-    <li><a href="#demo" class="nav-cta">Probar</a></li>
+    <li><a href="#demo" class="nav-cta">Hacer la llamada</a></li>
   </ul>
 </nav>
 
@@ -253,20 +316,23 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   <div class="hero-orb orb2"></div>
   <div class="hero-orb orb3"></div>
 
+  <span class="hero-badge">Para empresas que contratan comerciales sin experiencia</span>
+
   <h1 class="hero-headline">
-    Ponte al teléfono con un cliente <em>que no te lo va a poner fácil.</em>
+    Tus comerciales nuevos practican aquí. <em>No con tus clientes.</em>
   </h1>
 
   <p class="hero-sub">
-    Cinco minutos. Tú vendes, él objeta. Al colgar te digo qué has hecho bien y qué no.
+    Un cliente con IA les coge el teléfono, les pone objeciones reales y, al colgar, les dice qué han hecho bien y qué no.
   </p>
 
   <div class="hero-actions">
     <a href="#demo" class="btn-primary">
-      Probar ahora
+      Haz tú la llamada (5 min)
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
+  <p class="hero-micro">Sin tarjeta. Sin instalar nada. Desde el navegador.</p>
 
   <div class="hero-scroll">
     <div class="scroll-line"></div>
@@ -281,37 +347,39 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
         <span class="dot dot-r"></span>
         <span class="dot dot-y"></span>
         <span class="dot dot-g"></span>
-        <div class="mockup-url">salesduo.app/demo</div>
+        <div class="mockup-url">app.salesduo.es/practicar</div>
       </div>
       <div class="mockup-inner">
-        <div class="chat-ui">
-          <div class="chat-header-ui">
-            <div class="chat-persona">
-              <div class="persona-avatar"><img src="/icons/ai.svg" class="icon"></div>
-              <div class="persona-info">
-                <h4>Carlos Méndez — Director de Operaciones</h4>
-                <p>Empresa logística · 80 personas · Objeción: precio</p>
-              </div>
+        <div class="call-ui">
+          <div class="call-card">
+            <span class="call-status"><span class="live"></span> Llamada en curso · 01:42</span>
+            <div class="call-avatar-wrap">
+              <span class="call-ring"></span><span class="call-ring r2"></span><span class="call-ring r3"></span>
+              <div class="call-avatar">CM</div>
             </div>
-            <div class="score-badge"><img src="/icons/trophy.svg" class="icon"> +80 pts</div>
+            <div class="call-name">Carlos Méndez</div>
+            <div class="call-role">Director de Operaciones · Empresa logística</div>
+            <div class="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="call-speaking">Carlos está hablando…</div>
+            <div class="call-controls">
+              <span class="call-btn" title="Micrófono"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></svg></span>
+              <span class="call-btn hang" title="Colgar"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></span>
+              <span class="call-btn" title="Altavoz"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></span>
+            </div>
           </div>
-          <div class="messages">
-            <div class="msg msg-client">
-              "Me parece interesante, pero es bastante caro para lo que ofrecéis."
+          <div class="transcript">
+            <div class="transcript-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></svg> Lo que se dice en la llamada</div>
+            <div class="line">
+              <span class="line-who client"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg> CARLOS (CLIENTE IA)</span>
+              <div class="line-text">"Me parece interesante, pero es bastante caro para lo que ofrecéis."</div>
             </div>
-            <div class="msg msg-user">
-              "Entiendo la preocupación por el coste. ¿Cuánto os cuesta ahora mismo formar a un comercial nuevo hasta que sea productivo?"
+            <div class="line you">
+              <span class="line-who you"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></svg> TÚ</span>
+              <div class="line-text">"Entiendo. ¿Cuánto os cuesta ahora mismo que un comercial nuevo tarde meses en ser productivo?"</div>
             </div>
             <div class="msg-feedback">
-              ✦ &nbsp;<span>Excelente — usaste la técnica de <strong>coste de no-acción</strong>. Carlos está reconsiderando. +40 pts</span>
+              ✦ &nbsp;<span>Bien: has llevado la objeción de precio al <strong>coste de no hacer nada</strong>. Carlos está reconsiderando.</span>
             </div>
-            <div class="msg msg-client" style="opacity:0.6;">
-              <div class="typing-indicator"><span></span><span></span><span></span></div>
-            </div>
-          </div>
-          <div class="chat-input-ui">
-            <input type="text" placeholder="Escribe tu respuesta de ventas..." disabled>
-            <button class="send-btn">↑</button>
           </div>
         </div>
       </div>
@@ -319,17 +387,47 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   </div>
 </section>
 
-<!-- QUÉ ES ESTO -->
-<section id="que-es">
+<!-- PROBLEMA -->
+<section id="problema">
   <div class="container reveal">
-    <span class="section-label">Qué es esto</span>
-    <h2 class="section-title">Una prueba,<br><em>no una venta.</em></h2>
-    <p class="section-sub">Me llamo Daniel y estoy construyendo un simulador de llamadas de venta. Todavía no está terminado. Lo estoy montando con las objeciones reales de las oficinas con las que hablo, y esto es una prueba para que veas de qué va.</p>
+    <span class="section-label">El problema</span>
+    <div class="problem-lines">
+      <p>Contratas a alguien sin experiencia.<br>Le das el argumentario.<br>Y a llamar.</p>
+      <p class="muted">Las objeciones las aprende con clientes de verdad.<br>Cada una mal respondida es un cliente que no vuelve.</p>
+      <p>Tú no tienes tiempo de hacer roleplay con cada nuevo.<br><em>Y aunque lo tuvieras, tú no eres un cliente difícil.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="how">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Cómo funciona</span>
+      <h2 class="section-title">Tres pasos. <em>Cero roleplay por tu parte.</em></h2>
+    </div>
+    <div class="steps" style="margin-top:3rem;">
+      <div class="step"><div class="step-inner">
+        <span class="step-n">01</span>
+        <h3>Cuéntanos qué vendes</h3>
+        <p>Rellenas un formulario o subes tu documentación. El cliente con IA se adapta a tu producto.</p>
+      </div></div>
+      <div class="step"><div class="step-inner">
+        <span class="step-n">02</span>
+        <h3>Tu comercial llama</h3>
+        <p>Habla por voz con un cliente que objeta: "es caro", "ya tengo proveedor", "mándame info".</p>
+      </div></div>
+      <div class="step"><div class="step-inner">
+        <span class="step-n">03</span>
+        <h3>Al colgar, recibe su nota</h3>
+        <p>Qué ha hecho bien, qué tiene que cambiar. Y repite hasta que le salga.</p>
+      </div></div>
+    </div>
   </div>
 </section>
 
 <!-- QUIÉN HAY DETRÁS -->
-<section id="quien" style="background: var(--surface);">
+<section id="quien">
   <div class="container reveal">
     <span class="section-label">Quién hay detrás</span>
     <div style="display:flex; gap:2.5rem; align-items:center; margin-top:2rem; flex-wrap:wrap;">
@@ -339,7 +437,8 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
       </div>
       <div style="flex:1; min-width:280px;">
         <h3 style="font-family:var(--font-display); font-size:1.7rem; letter-spacing:-0.02em; margin-bottom:0.9rem;">Daniel Ruiz</h3>
-        <p style="color:var(--gray); font-size:0.98rem; line-height:1.75; margin-bottom:1.5rem;">15 años vendiendo en energía, software e inmobiliaria. Proyecto ganador del Demo Day del Polo Digital de Málaga.</p>
+        <p style="color:var(--gray); font-size:0.98rem; line-height:1.75; margin-bottom:1rem;">Más de 15 años asesorando a empresas de software, energía y renovables e inmobiliaria. SalesDuo fue reconocida como mejor startup del programa de EOI e Incyde en el Polo Digital de Málaga.</p>
+        <p style="color:var(--white); font-size:1.05rem; line-height:1.6; font-style:italic; margin-bottom:1.5rem;">"He visto a muchos comerciales nuevos quemarse en sus primeras llamadas. SalesDuo es el entrenamiento que me habría gustado tener."</p>
         <a href="https://www.linkedin.com/in/danielrc713" target="_blank" rel="noopener" class="btn-secondary">
           Ver mi LinkedIn
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
@@ -353,9 +452,9 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 <section id="demo">
   <div class="demo-orb"></div>
   <div class="demo-inner">
-    <span class="section-label reveal">Probar</span>
-    <h2 class="section-title reveal">Haz tu primera<br><em>llamada de prueba.</em></h2>
-    <p class="section-sub reveal" style="margin: 0 auto 0;">Cinco minutos. Tú vendes, él objeta. Al colgar te digo qué has hecho bien y qué no.</p>
+    <span class="section-label reveal">Pruébalo</span>
+    <h2 class="section-title reveal">Haz tú <em>la llamada.</em></h2>
+    <p class="section-sub reveal" style="margin: 0 auto 0;">Si a ti te cuesta, imagina a tu comercial nuevo.</p>
 
     <div class="demo-form reveal">
       <div class="form-row">
@@ -380,11 +479,48 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
         </select>
       </div>
       <button class="form-submit" type="button" onclick="handleSubmit(this)">
-        Empezar la prueba →
+        Quiero hacer la llamada →
       </button>
       <p style="text-align:center;font-size:0.75rem;color:var(--gray2);margin-top:1rem;">
         Sin tarjeta. Sin newsletter.
       </p>
+    </div>
+    <p class="pd reveal">P.D.: Son 5 minutos. Como mucho, descubres que tu equipo ya lo borda.</p>
+  </div>
+</section>
+
+<!-- RECONOCIMIENTOS -->
+<section id="respaldo">
+  <span class="respaldo-label">Reconocidos y acompañados por</span>
+  <div class="respaldo-row">
+    <div class="award">
+      <svg width="58" height="58" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <g stroke="#ffc857" stroke-width="2" stroke-linecap="round">
+              <path d="M20 52C11 46 8 35 11 24"/><path d="M44 52c9-6 12-17 9-28"/>
+            </g>
+            <g fill="#ffc857">
+              <ellipse cx="10" cy="30" rx="2.6" ry="5" transform="rotate(-20 10 30)"/>
+              <ellipse cx="11" cy="39" rx="2.6" ry="5" transform="rotate(-40 11 39)"/>
+              <ellipse cx="15" cy="47" rx="2.6" ry="5" transform="rotate(-60 15 47)"/>
+              <ellipse cx="54" cy="30" rx="2.6" ry="5" transform="rotate(20 54 30)"/>
+              <ellipse cx="53" cy="39" rx="2.6" ry="5" transform="rotate(40 53 39)"/>
+              <ellipse cx="49" cy="47" rx="2.6" ry="5" transform="rotate(60 49 47)"/>
+            </g>
+            <path d="M32 16l4.1 8.3 9.1 1.3-6.6 6.4 1.6 9.1L32 36.8l-8.2 4.3 1.6-9.1-6.6-6.4 9.1-1.3z" fill="#ffc857"/>
+            <text x="32" y="56" text-anchor="middle" font-size="8" font-weight="700" fill="#ffc857" font-family="DM Sans, sans-serif">2026</text>
+          </svg>
+      <div>
+        <div class="award-kicker">Ganador</div>
+        <div class="award-title">Mejor Startup</div>
+        <div class="award-sub">Desafío Emprendedor Innovador 2026</div>
+      </div>
+    </div>
+    <div class="respaldo-logos">
+      <div class="logo-slot"><img src="/img/logos/eoi.png" alt="EOI Escuela de Organización Industrial" loading="lazy"></div>
+      <div class="logo-slot"><img src="/img/logos/incyde.svg" alt="Fundación INCYDE" loading="lazy"></div>
+      <div class="logo-slot"><img src="/img/logos/polo-digital.png" alt="Polo de Contenidos Digitales de Málaga" loading="lazy"></div>
+      <div class="logo-slot"><img src="/img/logos/sherpa-tribe.svg" alt="Sherpa Tribe" loading="lazy"></div>
+      <div class="logo-slot tall"><img src="/img/logos/utamed.svg" alt="UTAMED" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -392,7 +528,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 <footer>
   <a href="#" class="footer-logo">Sales<span>Duo</span></a>
   <ul class="footer-links">
-    <li><a href="#demo">Probar</a></li>
+    <li><a href="#demo">Hacer la llamada</a></li>
     <li><a href="mailto:salesduoapp@gmail.com">Contacto</a></li>
   </ul>
   <p class="footer-copy">© 2026 SalesDuo — España</p>
@@ -492,7 +628,7 @@ async function handleSubmit(btn) {
   if (blockedDomains.has(emailDomain)) { emailInput.setCustomValidity('Ese dominio no es válido.'); emailInput.reportValidity(); return; }
   if (!tamano) { sizeSelect.setCustomValidity('Selecciona el tamaño del equipo.'); sizeSelect.reportValidity(); return; }
 
-  btn.textContent = 'Empezando la prueba...';
+  btn.textContent = 'Preparando la llamada...';
   btn.disabled = true;
 
   const token = md5(email);
