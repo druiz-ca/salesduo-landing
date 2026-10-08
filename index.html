@@ -594,7 +594,7 @@ function md5(str) {
 }
 
 const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/gm4bcobbujwf5o6iewmoerhuy2l9wh9b';
-const APP_BASE_URL = 'https://salesduo-tan.vercel.app';
+const APP_BASE_URL = 'https://app.salesduo.es';
 // Supabase como source of truth — independiente de Make. Si Make/Gmail/Slack
 // se caen, el lead sigue guardado aquí. La anon key es publishable, segura
 // (RLS valida que token = md5(email) para bloquear spam).
@@ -629,15 +629,13 @@ async function handleSubmit(btn) {
   if (blockedDomains.has(emailDomain)) { emailInput.setCustomValidity('Ese dominio no es válido.'); emailInput.reportValidity(); return; }
   if (!tamano) { sizeSelect.setCustomValidity('Selecciona el tamaño del equipo.'); sizeSelect.reportValidity(); return; }
 
-  btn.textContent = 'Preparando la llamada...';
+  btn.textContent = 'Preparando tu acceso...';
   btn.disabled = true;
 
   const token = md5(email);
-  // Pasamos email/name en base64 url-safe. La app los usa de fallback si Make
-  // todavía no ha insertado el row en demo_tokens — así nunca redirige al user
-  // de vuelta a la landing por una race condition.
-  const b64u = (s) => btoa(unescape(encodeURIComponent(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-  const appUrl = `${APP_BASE_URL}/?mvp=1&token=${token}&icp=${ICP}&e=${b64u(email)}&n=${b64u(name)}`;
+  // Crear cuenta en la app con nombre y email ya rellenos. Van en el #hash
+  // (no en la query): no viajan al servidor ni quedan en logs.
+  const appUrl = `${APP_BASE_URL}/signup#email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}`;
 
   // 1) PRIMERO: escribir el lead en Supabase (source of truth). Esperamos a
   // que termine para garantizar que el lead queda guardado antes del redirect.

@@ -625,7 +625,7 @@ function md5(str) {
 }
 
 const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/gm4bcobbujwf5o6iewmoerhuy2l9wh9b';
-const APP_BASE_URL = 'https://salesduo-tan.vercel.app';
+const APP_BASE_URL = 'https://app.salesduo.es';
 const SUPABASE_URL = 'https://ekchfmncwmrtdahqdhhw.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_7evH8OYknL0fZ-DOp_1TyA_nCRqD-9_';
 const ICP = 'movistar';
@@ -660,8 +660,9 @@ async function handleSubmit(btn) {
   btn.disabled = true;
 
   const token = md5(email);
-  const b64u = (s) => btoa(unescape(encodeURIComponent(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-  const appUrl = `${APP_BASE_URL}/?mvp=1&token=${token}&icp=${ICP}&e=${b64u(email)}&n=${b64u(name)}`;
+  // Crear cuenta en la app con nombre y email ya rellenos. Van en el #hash
+  // (no en la query): no viajan al servidor ni quedan en logs.
+  const appUrl = `${APP_BASE_URL}/signup#email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}`;
 
   try {
     await fetch(`${SUPABASE_URL}/rest/v1/demo_tokens`, {
