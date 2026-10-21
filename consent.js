@@ -51,17 +51,17 @@
 
   var css =
     "#sd-cookies{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:560px;margin:0 auto;" +
-    "background:#0c1018;border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:20px;" +
-    "box-shadow:0 10px 40px rgba(0,0,0,0.5);font-family:'DM Sans',system-ui,sans-serif;color:#fff;" +
+    "background:#FFFFFF;border:1px solid rgba(11,18,32,0.12);border-radius:16px;padding:20px;" +
+    "box-shadow:0 10px 40px rgba(11,18,32,0.12);font-family:'DM Sans',system-ui,sans-serif;color:#0B1220;" +
     "font-size:0.875rem;line-height:1.5;font-weight:300}" +
     "#sd-cookies p{margin:0 0 14px}" +
-    "#sd-cookies a{color:#00d4ff;text-decoration:underline;text-underline-offset:2px}" +
+    "#sd-cookies a{color:#0070D6;text-decoration:underline;text-underline-offset:2px}" +
     "#sd-cookies .sd-row{display:flex;gap:10px;flex-wrap:wrap}" +
     "#sd-cookies button{flex:1;min-width:120px;padding:0.7rem 1.2rem;border-radius:50px;font:600 0.875rem 'DM Sans',system-ui,sans-serif;cursor:pointer;" +
-    "border:1px solid #00d4ff;transition:opacity .2s}" +
+    "border:1px solid #0070D6;transition:opacity .2s}" +
     "#sd-cookies button:hover{opacity:.85}" +
-    "#sd-cookies .sd-accept{background:#00d4ff;color:#060810}" +
-    "#sd-cookies .sd-reject{background:transparent;color:#00d4ff}";
+    "#sd-cookies .sd-accept{background:#0070D6;color:#fff}" +
+    "#sd-cookies .sd-reject{background:transparent;color:#0070D6}";
 
   function showBanner() {
     if (document.getElementById("sd-cookies")) return;
