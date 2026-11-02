@@ -27,5 +27,6 @@
 ## Enlaces
 - Web: https://www.salesduo.es/
 - Preguntas frecuentes: https://www.salesduo.es/#faq
+- Roleplay de ventas con IA (qué es, cómo funciona, FAQ): https://www.salesduo.es/roleplay-ventas-ia
 - App: https://app.salesduo.es/
 - Privacidad: https://app.salesduo.es/legal/privacidad
