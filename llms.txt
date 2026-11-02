@@ -1,0 +1,31 @@
+# SalesDuo
+
+> SalesDuo es un simulador de ventas con IA en español (España). Los comerciales practican llamadas por voz con un cliente con IA que pone objeciones reales y, al colgar, reciben una evaluación con lo que han hecho bien y lo que deben cambiar. No confundir con salesduo.com (agencia de Amazon) ni salesduo.io.
+
+## Para quién
+- Empresas que contratan comerciales sin experiencia y con mucha rotación: call centers (BPO), energía, alarmas, telecos, seguros, financieras, formación, clínicas y ONG.
+- Objetivo: reducir el tiempo que tarda un comercial nuevo en cerrar su primera venta, sin quitar horas al responsable ni gastar leads reales.
+
+## Qué hace
+- Roleplay de ventas con IA por voz, desde el navegador (ordenador o móvil), sin instalar nada.
+- Tres tipos de llamada: en frío, setter y closer, con tu propio producto.
+- Objeciones reales a partir del playbook o la información de producto de la empresa.
+- Evaluación automática al colgar: puntos fuertes, qué cambiar y nota.
+- Panel para el responsable: prácticas por comercial, notas y errores más frecuentes.
+- Idiomas de práctica: español de España e inglés.
+
+## Precio
+- Precio fundador hasta el lanzamiento: 49 € + IVA por comercial al mes, todos los módulos, 150 minutos de práctica.
+- 7 días de prueba gratis sin tarjeta. Sin permanencia.
+- Llamada de prueba sin cuenta en https://www.salesduo.es/#llamada
+
+## Empresa
+- Fundador: Daniel Ruiz, más de 15 años asesorando a empresas de software, energía e inmobiliaria (https://www.linkedin.com/in/danielrc713).
+- Málaga, España. Ganador «Mejor Startup» del Desafío Emprendedor Innovador 2026 (EOI e Incyde, Polo Digital de Málaga).
+- Contacto: hola@salesduo.es
+
+## Enlaces
+- Web: https://www.salesduo.es/
+- Preguntas frecuentes: https://www.salesduo.es/#faq
+- App: https://app.salesduo.es/
+- Privacidad: https://app.salesduo.es/legal/privacidad
