@@ -419,6 +419,9 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 .logo-slot:hover { opacity: 1; }
 .logo-slot img { max-height: 40px; max-width: 140px; width: auto; height: auto; filter: brightness(0); }
 .logo-slot.tall img { max-height: 48px; }
+.logo-slot.logo-by { flex-direction: column; gap: 2px; }
+.logo-slot.logo-by img { max-height: 30px; }
+.logo-slot.logo-by span { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: #5B6474; line-height: 1; }
 .respaldo-logos { display: flex; align-items: center; justify-content: center; gap: 2.25rem; flex-wrap: wrap; }
 @media (max-width: 768px) { .respaldo-row { gap: 1.75rem; } }
 .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 0.75rem; }
@@ -729,8 +732,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
       <div class="logo-slot"><img src="/img/logos/polo-digital.png" alt="Polo de Contenidos Digitales de Málaga" loading="lazy"></div>
       <div class="logo-slot"><img src="/img/logos/sherpa-tribe.svg" alt="Sherpa Tribe" loading="lazy"></div>
       <div class="logo-slot"><img src="/img/logos/malaga-tech.svg" alt="Málaga Tech" loading="lazy"></div>
-      <div class="logo-slot tall"><img src="/img/logos/utamed.svg" alt="UTAMED" loading="lazy"></div>
-      <div class="logo-slot"><img src="/img/logos/b-kinetic.png" alt="B-KINETIC" loading="lazy"></div>
+      <div class="logo-slot logo-by"><img src="/img/logos/b-kinetic.png" alt="B-KINETIC by UTAMED" loading="lazy"><span>by UTAMED</span></div>
     </div>
     </div>
   </div>
