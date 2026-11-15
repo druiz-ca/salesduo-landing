@@ -627,7 +627,7 @@ function md5(str) {
   return binl2hex(coreMD5(str2binl(encoded), encoded.length * 8));
 }
 
-const CRM_LEAD_URL = 'https://app.salesduo.es/api/landing-lead';
+const CRM_LEAD_URL = 'https://n8n.salesduo.es/webhook/landing-lead';
 const APP_BASE_URL = 'https://app.salesduo.es';
 // Supabase como source of truth — independiente del CRM. Si el CRM/Airtable
 // se caen, el lead sigue guardado aquí. La anon key es publishable, segura
